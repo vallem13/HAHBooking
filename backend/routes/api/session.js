@@ -47,6 +47,8 @@ async (req, res, next) => {
 
   const safeUser = {
     id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
     email: user.email,
     username: user.username,
   };
@@ -110,6 +112,8 @@ router.get(
       if (user) {
         const safeUser = {
           id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           username: user.username,
         };
@@ -119,8 +123,6 @@ router.get(
       } else return res.json({ user: null });
     }
   );
-
-
 
 
 module.exports = router;
