@@ -92,7 +92,7 @@ router.post('/', requireAuth, createSpotChecker, async (req, res, next) => {
 })
 
 // 5. Add Image to a spot
-router.post('/:spotId/images', async (req, res, next) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { url, preview } = req.body
 
     const spot = await Spot.findByPk(req.params.spotId)
