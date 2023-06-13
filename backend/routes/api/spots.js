@@ -46,7 +46,7 @@ router.get('/', async (req, res, next) => {
     })
 })
 
-// 4. Post a new spot
+// 4. Post a new spot w/ error handlers
 const createSpotChecker = (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
 
@@ -71,7 +71,6 @@ const createSpotChecker = (req, res, next) => {
     next()
 }
 
-
 router.post('/', requireAuth, createSpotChecker, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
 
@@ -90,6 +89,30 @@ router.post('/', requireAuth, createSpotChecker, async (req, res, next) => {
 
     res.status(201)
     res.json(newSpot)
+})
+
+// 5. Add Image to a spot
+router.post('/:spotId/images', async (req, res, next) => {
+    const { url, preview } = req.body
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+    const newImage = await spot.createSpotImage({
+        url,
+        preview
+    })
+
+    res.status(200)
+    res.json({
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview,
+    })
+
 })
 
 // 2. Get all spots by the current user that is logged in w/ avg rating and images
