@@ -28,6 +28,8 @@ validateLogin,
 async (req, res, next) => {
   const { credential, password } = req.body;
 
+  console.log(credential)
+
   const user = await User.unscoped().findOne({
     where: {
       [Op.or]: {
