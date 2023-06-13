@@ -86,7 +86,7 @@ router.get(
         });
       } else return res.json({ user: null });
     }
-  );
+);
 
 
 module.exports = router;
