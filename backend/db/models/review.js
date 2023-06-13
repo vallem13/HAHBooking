@@ -28,15 +28,15 @@ module.exports = (sequelize, DataTypes) => {
   }
   Review.init({
     spotId: {
-      tyoe: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     userId: {
-      tyoe: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     review: {
-      tyoe: DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         reviewText(value) {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     stars: {
-      tyoe: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         min: 1,
