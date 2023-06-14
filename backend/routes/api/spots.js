@@ -101,6 +101,10 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         return res.status(404).json({ message: "Spot couldn't be found"})
     }
 
+    if (spot.ownerId !== req.user.id) {
+        return res.status(403).json({ message: "Forbidden"})
+    }
+
     const newImage = await spot.createSpotImage({
         url,
         preview
@@ -215,7 +219,7 @@ router.put('/:spotId', requireAuth, createSpotChecker, async (req, res, next) =>
     }
 
     if (spot.ownerId !== req.user.id) {
-        return res.status(401).json({ message: "Unauthorized User"})
+        return res.status(403).json({ message: "Forbidden"})
     }
 
     const { address, city, state, country, lat, lng, name, description, price } = req.body
@@ -266,7 +270,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     }
 
     if (spot.ownerId !== req.user.id) {
-        return res.status(401).json({ message: "Unauthorized User"})
+        return res.status(403).json({ message: "Forbidden"})
     }
 
     await spot.destroy()
@@ -312,7 +316,7 @@ router.post('/:spotId/reviews', requireAuth, createReviewChecker, async (req, re
     })
 
     if (checkReview) {
-        return res.status(403).json({ message: 'User already has a review for this spot'})
+        return res.status(500).json({ message: 'User already has a review for this spot'})
     }
 
     const newSpotReview = await spot.createReview({
@@ -328,6 +332,13 @@ router.post('/:spotId/reviews', requireAuth, createReviewChecker, async (req, re
 
 // 9. Get all reviews by spotId
 router.get('/:spotId/reviews', async (req, res, next) => {
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
     const review = await Review.findAll({
         where: {
             spotId: req.params.spotId
@@ -343,11 +354,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             }
         ]
     })
-
-    if (!review) {
-        return res.status(404).json({ message: "Spot couldn't be found"})
-    }
-
 
     res.status(200)
     res.json({
