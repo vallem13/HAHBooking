@@ -277,7 +277,25 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 })
 
 // 8. Create a review by spotId
-router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+const createReviewChecker = (req, res, next) => {
+    const { review, stars } = req.body
+
+    const errors = {}
+
+    if (!review) errors.address = 'Review text is required'
+    if (!stars) errors.city = 'Stars must be an integer from 1 to 5'
+
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({
+            message: 'Bad Request',
+            errors: errors
+        })
+    }
+    next()
+}
+
+router.post('/:spotId/reviews', requireAuth, createReviewChecker, async (req, res, next) => {
     const { review, stars } = req.body
 
     const spot = await Spot.findByPk(req.params.spotId)
