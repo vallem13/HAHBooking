@@ -1,5 +1,5 @@
 const express = require('express');
-const { Spot, User, Booking, SpotImage, Review } = require('../../db/models');
+const { Spot, User, Booking, SpotImage, Review, ReviewImage } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -124,7 +124,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         },
         include: [
             {
-                model: Review
+                model: Review,
             },
             {
                 model: SpotImage,
@@ -286,18 +286,18 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         return res.status(404).json({ message: "Spot couldn't be found"})
     }
 
-    const existingReview = await Review.findOne({
+    const checkReview = await Review.findOne({
         where: {
             spotId: req.params.spotId,
             userId: req.user.id
         }
     })
 
-    if (existingReview) {
+    if (checkReview) {
         return res.status(403).json({ message: 'User already has a review for this spot'})
     }
 
-    const newReview = await spot.createReview({
+    const newSpotReview = await spot.createReview({
         userId: req.user.id,
         spotId: req.params.spotId,
         review,
@@ -305,16 +305,37 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     })
 
     res.status(201)
-    res.json({
-        id,
-        userId: newReview.userId,
-        spotId: newReview.spotId,
-        review: newReview.review,
-        stars: newReview.stars
-    })
+    res.json(newSpotReview)
 })
 
 // 9. Get all reviews by spotId
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const review = await Review.findAll({
+        where: {
+            spotId: req.params.spotId
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    })
+
+    if (!review) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+
+    res.status(200)
+    res.json({
+        Reviews: review
+    })
+})
 
 
 module.exports = router;
