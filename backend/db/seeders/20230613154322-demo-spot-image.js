@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         spotId: 3,
-        url: 'https://afar.brightspotcdn.com/dims4/default/0bac719/2147483647/strip/true/crop/1500x750+0+125/resize/1440x720!/quality/90/?url=https%3A%2F%2Fafar-media-production-web.s3.amazonaws.com%2Fbrightspot%2Fd2%2F1d%2Faf582797f5374a5242348f4c2d96%2Foriginal-airbnb-20categories-20-20design-20-202.jpg',
+        url: 'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
         preview: true
       }
     ], {})
