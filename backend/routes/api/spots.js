@@ -257,5 +257,64 @@ router.put('/:spotId', requireAuth, createSpotChecker, async (req, res, next) =>
 
 })
 
+// 7. Delete a spot by spotId
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+    if (spot.ownerId !== req.user.id) {
+        return res.status(401).json({ message: "Unauthorized User"})
+    }
+
+    await spot.destroy()
+
+    res.json({
+        message: 'Successfully deleted'
+    })
+})
+
+// 8. Create a review by spotId
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+    const { review, stars } = req.body
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+    const existingReview = await Review.findOne({
+        where: {
+            spotId: req.params.spotId,
+            userId: req.user.id
+        }
+    })
+
+    if (existingReview) {
+        return res.status(403).json({ message: 'User already has a review for this spot'})
+    }
+
+    const newReview = await spot.createReview({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        review,
+        stars
+    })
+
+    res.status(201)
+    res.json({
+        id,
+        userId: newReview.userId,
+        spotId: newReview.spotId,
+        review: newReview.review,
+        stars: newReview.stars
+    })
+})
+
+// 9. Get all reviews by spotId
+
 
 module.exports = router;
