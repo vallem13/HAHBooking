@@ -206,5 +206,56 @@ router.get('/:spotId', async (req, res, next) => {
     res.json(spotsObj)
 })
 
+// 6. Edit a spot
+router.put('/:spotId', requireAuth, createSpotChecker, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+    if (spot.ownerId !== req.user.id) {
+        return res.status(401).json({ message: "Unauthorized User"})
+    }
+
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+    let setObj = {}
+
+    if (address) {
+        setObj.address = address
+    }
+    if (city) {
+        setObj.city = city
+    }
+    if (state) {
+        setObj.state = state
+    }
+    if (country) {
+        setObj.country = country
+    }
+    if (lat) {
+        setObj.lat = lat
+    }
+    if (lng) {
+        setObj.lng = lng
+    }
+    if (name) {
+        setObj.name = name
+    }
+    if (description) {
+        setObj.description = description
+    }
+    if (price) {
+        setObj.price = price
+    }
+
+    spot.set(setObj)
+    await spot.save()
+
+    res.json(spot)
+
+})
+
 
 module.exports = router;
