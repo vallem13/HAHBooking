@@ -3,6 +3,7 @@ const { Spot, User, Booking, SpotImage, Review, ReviewImage } = require('../../d
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { Op } = require('sequelize')
 
 const router = express.Router();
 
@@ -359,6 +360,105 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     res.json({
         Reviews: review
     })
+})
+
+// 10. POST a booking w/ spotId
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { startDate, endDate } = req.body
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+    if (req.user.id === spot.ownerId) {
+        return res.status(403).json({ message: 'Forbidden'})
+    }
+
+    const checkAvailability = await Booking.findOne({
+        where: {
+            spotId: req.params.spotId,
+            [Op.or]: [
+                {
+                    startDate: {[Op.between]: [startDate, endDate]}
+                },
+                {
+                    endDate: {[Op.between]: [startDate, endDate]}
+                },
+            ]
+        }
+    })
+
+    if (checkAvailability) {
+        return res.status(403).json({
+            message: "Sorry, this spot is already booked for the specified dates",
+            errors: {
+              startDate: "Start date conflicts with an existing booking",
+              endDate: "End date conflicts with an existing booking"
+            }
+        })
+    }
+
+    const newBooking = await spot.createBooking({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        startDate,
+        endDate
+    })
+
+    const newBookingUpdates = {
+        id: newBooking.id,
+        spotId: newBooking.spotId,
+        userId: newBooking.userId,
+        startDate: newBooking.startDate.toISOString().slice(0,10),
+        endDate: newBooking.endDate.toISOString().slice(0,10),
+        createdAt: newBooking.createdAt,
+        updatedAt: newBooking.updatedAt
+    }
+
+    res.status(200)
+    res.json(newBookingUpdates)
+
+})
+
+// 11. GET a booking w/ spotId
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+
+    if (req.user.id === spot.ownerId) {
+
+        const booking = await Booking.findAll({
+            where: {
+                spotId: req.params.spotId
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        })
+        res.status(200).json({
+            Bookings: booking
+        })
+    }
+
+    if (req.user.id !== spot.ownerId) {
+        const booking = await Booking.findAll({
+            where: {
+                spotId: req.params.spotId
+            },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        res.status(200).json({
+            Bookings: booking
+        })
+    }
 })
 
 
