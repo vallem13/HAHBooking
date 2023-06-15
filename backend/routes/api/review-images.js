@@ -19,7 +19,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
     })
 
     if (!reviewImage) {
-        return res.status(404).json({ message: "Spot couldn't be found"})
+        return res.status(404).json({ message: "Review Image couldn't be found"})
     }
 
     if (reviewImage.userId !== req.user.id) {
