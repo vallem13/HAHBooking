@@ -135,7 +135,23 @@ router.put('/:reviewId', requireAuth, createReviewChecker, async (req, res, next
 })
 
 // 15. Delete review by review
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+    const review = await Review.findByPk(req.params.reviewId)
 
+    if (!review) {
+        return res.status(404).json({ message: "Review couldn't be found"})
+    }
+
+    if (review.userId !== req.user.id) {
+        return res.status(403).json({ message: "Forbidden"})
+    }
+
+    await review.destroy()
+
+    res.json({
+        message: 'Successfully deleted'
+    })
+})
 
 
 module.exports = router;
