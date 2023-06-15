@@ -9,24 +9,24 @@ const router = express.Router();
 
 // 19. Delete a review by imageId
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
-    const reviewImage = await Review.findOne({
+    const image = await ReviewImage.findOne({
         where: {
             id: req.params.imageId
         },
         include: {
-            model: ReviewImage
+            model: Review
         }
     })
 
-    if (!reviewImage) {
+    if (!image) {
         return res.status(404).json({ message: "Review Image couldn't be found"})
     }
 
-    if (reviewImage.userId !== req.user.id) {
+    if (image.Review.userId !== req.user.id) {
         return res.status(403).json({ message: "Forbidden"})
     }
 
-    await reviewImage.destroy()
+    await image.destroy()
 
     res.status(200)
     res.json({
