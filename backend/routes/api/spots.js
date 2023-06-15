@@ -9,6 +9,31 @@ const router = express.Router();
 
 // 1. Get all spots w/ avg rating and images
 router.get('/', async (req, res, next) => {
+
+    // 20. Add Query Filters to Get All Spots
+    let {page, size} = req.query
+
+    if (!page || isNaN(page)) page = 1
+    else page = parseInt(page)
+
+    if (!size || isNaN(size)) size = 20
+    else size = parseInt(size)
+
+    if (size <= 0) {
+        return res.status(400).json({ message: "Size must be greater than or equal to 1" })
+    }
+
+    if (page <= 0) {
+        return res.status(400).json({ message: "Page must be greater than or equal to 1" })
+    }
+
+    let pagination = {}
+
+    if(page >= 1 && size >= 1) {
+        pagination.limit = size
+        pagination.offset = (page - 1) * size
+    }
+
     const spots = await Spot.findAll({
         include: [
             {
@@ -18,7 +43,8 @@ router.get('/', async (req, res, next) => {
                 model: SpotImage,
                 attributes: ['url']
             }
-        ]
+        ],
+        ...pagination
     })
 
     const allSpots = spots.map(spot => {
@@ -43,7 +69,9 @@ router.get('/', async (req, res, next) => {
     })
 
     res.json({
-        Spots: allSpots
+        Spots: allSpots,
+        page,
+        size
     })
 })
 
