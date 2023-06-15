@@ -78,7 +78,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         delete image.SpotImages
 
-        return image
+        return spotsObj
     })
 
     res.json({
