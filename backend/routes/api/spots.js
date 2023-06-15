@@ -149,6 +149,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         }
 
         spotsObj.averageRating = rating / spotsObj.Reviews.length
+
         if (spotsObj.SpotImages.length > 0) {
             spotsObj.previewImage = spotsObj.SpotImages[0].url
         }
