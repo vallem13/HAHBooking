@@ -363,7 +363,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     })
 })
 
-// 10. POST a booking w/ spotId
+// 10. POST a booking by spotId
 router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const { startDate, endDate } = req.body
 

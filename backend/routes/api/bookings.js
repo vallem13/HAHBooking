@@ -50,11 +50,11 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     const booking = await Booking.findByPk(req.params.bookingId)
 
     if (!booking) {
-        return res.status(404).json({ message: "Booking couldn't be found"})
+        return res.status(404).json({ message: "Booking couldn't be found" })
     }
 
     if (booking.userId !== req.user.id) {
-        return res.status(403).json({ message: "Forbidden"})
+        return res.status(403).json({ message: "Forbidden" })
     }
 
     const { startDate, endDate } = req.body
@@ -64,10 +64,10 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             spotId: req.params.bookingId,
             [Op.or]: [
                 {
-                    startDate: {[Op.between]: [startDate, endDate]}
+                    startDate: { [Op.between]: [startDate, endDate] }
                 },
                 {
-                    endDate: {[Op.between]: [startDate, endDate]}
+                    endDate: { [Op.between]: [startDate, endDate] }
                 },
             ]
         }
@@ -77,16 +77,16 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         return res.status(403).json({
             message: "Sorry, this spot is already booked for the specified dates",
             errors: {
-              startDate: "Start date conflicts with an existing booking",
-              endDate: "End date conflicts with an existing booking"
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End date conflicts with an existing booking"
             }
         })
     }
 
-    let currentDate = new Date().toJSON().slice(0, 10);
+    let currentDate = new Date().toJSON().slice(0, 10)
 
-    if(startDate < currentDate) {
-        return res.status(403).json({ message: "Past bookings can't be modified"})
+    if (startDate < currentDate) {
+        return res.status(403).json({ message: "Past bookings can't be modified" })
     }
 
     let setObj = {}
@@ -101,25 +101,31 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     booking.set(setObj)
     await booking.save()
 
+    res.status(200)
     res.json(booking)
-
-
 })
 
 // 17. Delete a booking by bookingId
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
-    const booking = await Booking.findByPk(req.params.reviewId)
+    const booking = await Booking.findByPk(req.params.bookingId)
 
     if (!booking) {
-        return res.status(404).json({ message: "Booking couldn't be found"})
+        return res.status(404).json({ message: "Booking couldn't be found" })
     }
 
     if (booking.userId !== req.user.id) {
-        return res.status(403).json({ message: "Forbidden"})
+        return res.status(403).json({ message: "Forbidden" })
+    }
+
+    let currentDate = new Date().toJSON().slice(0, 10)
+
+    if (currentDate >= req.body.startDate) {
+        return res.status(403).json({ message: "Bookings that have been started can't be deleted" })
     }
 
     await booking.destroy()
 
+    res.status(200)
     res.json({
         message: 'Successfully deleted'
     })
