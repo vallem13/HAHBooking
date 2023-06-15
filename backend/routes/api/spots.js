@@ -8,7 +8,24 @@ const { Op } = require('sequelize')
 const router = express.Router();
 
 // 1. Get all spots w/ avg rating and images
-router.get('/', async (req, res, next) => {
+const createQueryChecker = (req, res, next) => {
+    const { page, size } = req.query
+
+    const errors = {}
+
+    if (size <= 0) errors.size = "Size must be greater than or equal to 1"
+    if (page <= 0) errors.page = "Page must be greater than or equal to 1"
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({
+            message: 'Bad Request',
+            errors: errors
+        })
+    }
+    next()
+}
+
+router.get('/', createQueryChecker,  async (req, res, next) => {
 
     // 20. Add Query Filters to Get All Spots
     let {page, size} = req.query
@@ -19,20 +36,13 @@ router.get('/', async (req, res, next) => {
     if (!size || isNaN(size)) size = 20
     else size = parseInt(size)
 
-    if (size <= 0) {
-        return res.status(400).json({ message: "Size must be greater than or equal to 1" })
-    }
-
-    if (page <= 0) {
-        return res.status(400).json({ message: "Page must be greater than or equal to 1" })
-    }
+    if (size > 20) size = 20
+    if (page > 10) page = 1
 
     let pagination = {}
 
-    if(page >= 1 && size >= 1) {
-        pagination.limit = size
-        pagination.offset = (page - 1) * size
-    }
+    pagination.limit = size
+    pagination.offset = (page - 1) * size
 
     const spots = await Spot.findAll({
         include: [
