@@ -61,7 +61,6 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     const checkAvailability = await Booking.findOne({
         where: {
-            spotId: req.params.bookingId,
             [Op.or]: [
                 {
                     startDate: { [Op.between]: [startDate, endDate] }
