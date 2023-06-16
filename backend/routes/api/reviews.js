@@ -7,7 +7,7 @@ const { Op } = require('sequelize')
 
 const router = express.Router();
 
-// 12. Post image on a spotId
+// 12. Post image on a reviewId
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const { url } = req.body
 
@@ -38,7 +38,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     })
 
     res.status(200)
-    res.json(newImage)
+    res.json({
+        id: newImage.id,  // changed response
+        url: newImage.url,
+    })
 })
 
 // 13. Get all reviews by current user

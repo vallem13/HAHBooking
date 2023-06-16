@@ -78,6 +78,7 @@ router.get('/', createQueryChecker,  async (req, res, next) => {
         return spotsObj
     })
 
+    res.status(200)
     res.json({
         Spots: allSpots,
         page,
@@ -178,7 +179,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     const allSpots = spots.map(spot => {
         const spotsObj = spot.toJSON()
-        //console.log(spots)
 
         let rating = 0
 
@@ -198,6 +198,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         return spotsObj
     })
 
+    res.status(200)
     res.json({
         Spots: allSpots
     })
@@ -234,7 +235,7 @@ router.get('/:spotId', async (req, res, next) => {
        rating += reviews.stars
    }
 
-   spotsObj.averageRating = rating / spotsObj.Reviews.length
+   spotsObj.avgStarRating = rating / spotsObj.Reviews.length
    spotsObj.numReviews = spotsObj.Reviews.length
 
    delete spotsObj.Reviews
@@ -247,7 +248,8 @@ router.get('/:spotId', async (req, res, next) => {
     }))
    }
 
-    res.json(spotsObj)
+   res.status(200)
+   res.json(spotsObj)
 })
 
 // 6. Edit a spot
@@ -297,8 +299,8 @@ router.put('/:spotId', requireAuth, createSpotChecker, async (req, res, next) =>
     spot.set(setObj)
     await spot.save()
 
+    res.status(200)
     res.json(spot)
-
 })
 
 // 7. Delete a spot by spotId
@@ -315,19 +317,20 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
     await spot.destroy()
 
+    res.status(200)
     res.json({
         message: 'Successfully deleted'
     })
 })
 
-// 8. Create a review by spotId
+// 8. Post a review by spotId
 const createReviewChecker = (req, res, next) => {
     const { review, stars } = req.body
 
     const errors = {}
 
-    if (!review) errors.address = 'Review text is required'
-    if (!stars) errors.city = 'Stars must be an integer from 1 to 5'
+    if (!review) errors.review = 'Review text is required'
+    if (!stars) errors.stars = 'Stars must be an integer from 1 to 5'
 
 
     if (Object.keys(errors).length > 0) {
@@ -450,15 +453,14 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         id: newBooking.id,
         spotId: newBooking.spotId,
         userId: newBooking.userId,
-        startDate: newBooking.startDate.toISOString().slice(0,10),
-        endDate: newBooking.endDate.toISOString().slice(0,10),
+        startDate: newBooking.startDate, // .toISOString().slice(0,10),
+        endDate: newBooking.endDate, // .toISOString().slice(0,10),
         createdAt: newBooking.createdAt,
         updatedAt: newBooking.updatedAt
     }
 
     res.status(200)
     res.json(newBookingUpdates)
-
 })
 
 // 11. GET a booking w/ spotId
@@ -494,7 +496,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
             },
             attributes: ['spotId', 'startDate', 'endDate']
         })
-        res.status(200).json({
+        res.status(200)
+        res.json({
             Bookings: booking
         })
     }
