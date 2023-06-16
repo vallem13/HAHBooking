@@ -7,46 +7,6 @@ const { Op } = require('sequelize')
 
 const router = express.Router();
 
-// 1. Get all spots w/ avg rating and images
-router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll({
-        include: [
-            {
-                model: Review
-            },
-            {
-                model: SpotImage,
-                attributes: ['url']
-            }
-        ]
-    })
-
-    const allSpots = spots.map(spot => {
-        const spotsObj = spot.toJSON()
-        //console.log(spots)
-
-        let rating = 0
-
-        for (let reviews of spotsObj.Reviews) {
-            rating += reviews.stars
-        }
-
-        spotsObj.averageRating = rating / spotsObj.Reviews.length
-        if (spotsObj.SpotImages.length > 0) {
-            spotsObj.previewImage = spotsObj.SpotImages[0].url
-        }
-
-        delete spotsObj.Reviews
-        delete spotsObj.SpotImages
-
-        return spotsObj
-    })
-
-    res.json({
-        Spots: allSpots
-    })
-})
-
 const createSpotChecker = (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
 
