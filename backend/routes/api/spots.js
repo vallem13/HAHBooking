@@ -7,7 +7,48 @@ const { Op } = require('sequelize')
 
 const router = express.Router();
 
-// 1. Get all spots w/ avg rating and images
+const createSpotChecker = (req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+    const errors = {}
+
+    if (!address) errors.address = 'Street address is required'
+    if (!city) errors.city = 'City is required'
+    if (!state) errors.state = 'State is required'
+    if (!country) errors.country = 'Country is required'
+    if (!lat) errors.lat = 'Latitude is not valid'
+    if (!lng) errors.lng = 'Longitude is not valid'
+    if (!name) errors.name = 'Name must be less than 50 characters'
+    if (!description) errors.description = 'Description is required'
+    if (!price) errors.price = 'Price per day is required'
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({
+            message: 'Bad Request',
+            errors: errors
+        })
+    }
+    next()
+}
+
+const createReviewChecker = (req, res, next) => {
+    const { review, stars } = req.body
+
+    const errors = {}
+
+    if (!review) errors.address = 'Review text is required'
+    if (!stars) errors.city = 'Stars must be an integer from 1 to 5'
+
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({
+            message: 'Bad Request',
+            errors: errors
+        })
+    }
+    next()
+}
+
 const createQueryChecker = (req, res, next) => {
     const { page, size } = req.query
 
@@ -25,6 +66,7 @@ const createQueryChecker = (req, res, next) => {
     next()
 }
 
+// 1. Get all spots w/ avg rating and images
 router.get('/', createQueryChecker,  async (req, res, next) => {
 
     // 20. Add Query Filters to Get All Spots
@@ -57,91 +99,6 @@ router.get('/', createQueryChecker,  async (req, res, next) => {
         ...pagination
     })
 
-    const allSpots = spots.map(spot => {
-        const spotsObj = spot.toJSON()
-        //console.log(spots)
-
-        let rating = 0
-
-        for (let reviews of spotsObj.Reviews) {
-            rating += reviews.stars
-        }
-
-        spotsObj.averageRating = rating / spotsObj.Reviews.length
-        if (spotsObj.SpotImages.length > 0) {
-            spotsObj.previewImage = spotsObj.SpotImages[0].url
-        }
-
-        delete spotsObj.Reviews
-        delete spotsObj.SpotImages
-
-        return spotsObj
-    })
-
-    res.json({
-        Spots: allSpots,
-        page,
-        size
-    })
-})
-
-// 4. Post a new spot w/ error handlers
-const createSpotChecker = (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
-
-    const errors = {}
-
-    if (!address) errors.address = 'Street address is required'
-    if (!city) errors.city = 'City is required'
-    if (!state) errors.state = 'State is required'
-    if (!country) errors.country = 'Country is required'
-    if (!lat) errors.lat = 'Latitude is not valid'
-    if (!lng) errors.lng = 'Longitude is not valid'
-    if (!name) errors.name = 'Name must be less than 50 characters'
-    if (!description) errors.description = 'Description is required'
-    if (!price) errors.price = 'Price per day is required'
-
-    if (Object.keys(errors).length > 0) {
-        return res.status(400).json({
-            message: 'Bad Request',
-            errors: errors
-        })
-    }
-    next()
-}
-
-const createReviewChecker = (req, res, next) => {
-    const { review, stars } = req.body
-
-    const errors = {}
-
-    if (!review) errors.review = 'Review text is required'
-    if (!stars) errors.stars = 'Stars must be an integer from 1 to 5'
-
-
-    if (Object.keys(errors).length > 0) {
-        return res.status(400).json({
-            message: 'Bad Request',
-            errors: errors
-        })
-    }
-    next()
-}
-
-// 1. Get all spots w/ avg rating and images
-router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll({
-        include: [
-            {
-                model: Review
-            },
-            {
-                model: SpotImage,
-                attributes: ['url']
-            }
-        ]
-    })
-
     const spotsAttributes = spots.map(spot => {
         const allSpots = spot.toJSON()
 
@@ -152,7 +109,6 @@ router.get('/', async (req, res, next) => {
         }
 
         allSpots.averageRating = rating / allSpots.Reviews.length
-
         if (allSpots.SpotImages.length > 0) {
             allSpots.previewImage = allSpots.SpotImages[0].url
         }
@@ -165,7 +121,9 @@ router.get('/', async (req, res, next) => {
 
     res.status(200)
     res.json({
-        Spots: spotsAttributes
+        Spots: spotsAttributes,
+        page,
+        size
     })
 })
 
@@ -235,9 +193,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
         ]
     })
 
-    const allSpots = spots.map(spot => {
-        const spotsObj = spot.toJSON()
-        //console.log(spots)
+    const spotsAttributes = spots.map(spot => {
+        const allSpots = spot.toJSON()
 
         let rating = 0
 
@@ -245,9 +202,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
             rating += reviews.stars
         }
 
-        spotsObj.averageRating = rating / spotsObj.Reviews.length
-        if (spotsObj.SpotImages.length > 0) {
-            spotsObj.previewImage = spotsObj.SpotImages[0].url
+        allSpots.averageRating = rating / allSpots.Reviews.length
+        if (allSpots.SpotImages.length > 0) {
+            allSpots.previewImage = allSpots.SpotImages[0].url
         }
 
         delete allSpots.Reviews
@@ -293,8 +250,8 @@ router.get('/:spotId', async (req, res, next) => {
         rating += reviews.stars
     }
 
-   spotsObj.averageRating = rating / spotsObj.Reviews.length
-   spotsObj.numReviews = spotsObj.Reviews.length
+   spot.averageRating = rating / spot.Reviews.length
+   spot.numReviews = spot.Reviews.length
 
     delete spot.Reviews
 
@@ -306,7 +263,8 @@ router.get('/:spotId', async (req, res, next) => {
         }))
     }
 
-    res.json(spotsObj)
+    res.status(200)
+    res.json(spot)
 })
 
 // 6. Edit a spot
@@ -381,24 +339,6 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 })
 
 // 8. Create a review by spotId
-const createReviewChecker = (req, res, next) => {
-    const { review, stars } = req.body
-
-    const errors = {}
-
-    if (!review) errors.address = 'Review text is required'
-    if (!stars) errors.city = 'Stars must be an integer from 1 to 5'
-
-
-    if (Object.keys(errors).length > 0) {
-        return res.status(400).json({
-            message: 'Bad Request',
-            errors: errors
-        })
-    }
-    next()
-}
-
 router.post('/:spotId/reviews', requireAuth, createReviewChecker, async (req, res, next) => {
     const { review, stars } = req.body
 
