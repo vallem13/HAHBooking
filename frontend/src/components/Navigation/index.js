@@ -14,11 +14,8 @@ function Navigation({ isLoaded }){
 
   return (
     <nav id='Navigation-Bar'>
-      <img className='logo' src='../logo/hahbooking-high-resolution-color-logo.png' alt='HAHBooking' onClick={handleLogoClick} />
-      <ul>
-        <li>
-          <NavLink exact to="/">Home</NavLink>
-        </li>
+      <NavLink exact to="/"><img className='logo' src='../logo/hahbooking-high-resolution-color-logo.png' alt='HAHBooking' onClick={handleLogoClick} /></NavLink>
+      <ul className='session'>
         {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />

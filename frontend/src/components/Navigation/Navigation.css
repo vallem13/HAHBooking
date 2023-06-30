@@ -5,10 +5,37 @@
 .logo {
     height: 80px;
     width: 80px;
+    cursor: pointer;
 }
 
 #Navigation-Bar {
-    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
     top: 10px;
     left: 10px;
+}
+
+.session {
+    list-style-type: none;
+
+}
+
+#menu-drop {
+    list-style-type: none;
+    position: absolute;
+    right: 30px;
+    border: 1px solid black;
+    padding: 10px 10px;
+
+}
+
+#user-session {
+    list-style-type: none;
+    position: absolute;
+    right: 30px;
+    border: 1px solid black;
+    padding: 10px 10px;
 }
