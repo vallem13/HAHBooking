@@ -60,7 +60,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && <p className='error'>{errors.credential}</p>}
+        {errors.credential && <p className='error-login'>{errors.credential}</p>}
         <label>
           <div className="password">Password</div>
           <input
@@ -71,7 +71,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p className='error'>{errors.password}</p>}
+        {errors.password && <p className='error-login'>{errors.password}</p>}
         <div className="login-button">
           <button  type="submit" disabled={Object.keys(errors).length > 0}>Log In</button>
         </div>
