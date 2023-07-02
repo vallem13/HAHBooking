@@ -1,0 +1,32 @@
+.error {
+    display: none
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    margin: 100px 100px;
+    align-items: center;
+    align-content: space-between;
+
+}
+
+#login {
+    align-content: space-between;
+}
+
+.username {
+    padding-bottom: 5px;
+}
+
+.password {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.login-button {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    justify-content: center;
+}

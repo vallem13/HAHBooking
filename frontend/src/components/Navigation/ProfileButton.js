@@ -5,11 +5,14 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
+import { NavLink } from 'react-router-dom';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -36,12 +39,14 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    history.push('/')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
+      {user ? (<NavLink className="create-new-spot" exact to="/spots/new" >Create a New Spot</NavLink>) : ("")}
       <button id='login-button' onClick={openMenu}>
         <span class="material-symbols-outlined">menu</span>
         <span class="material-symbols-outlined">account_circle</span>
@@ -49,9 +54,11 @@ function ProfileButton({ user }) {
       <ul id='user-session' className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+            <li>Hello, {user.firstName}</li>
             <li>{user.email}</li>
+            <li>
+            <NavLink className="manage-spots" exact to="/spots/current" >Manage Spots</NavLink>
+            </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

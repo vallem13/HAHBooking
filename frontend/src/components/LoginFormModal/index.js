@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -10,6 +10,22 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  useEffect(() => {
+
+    const errors = {}
+
+    if (credential.length < 4) {
+      errors.credential = 'Username must be 4 or more characters'
+    }
+
+    if (password.length < 6) {
+      errors.password = 'Passsword must be 6 or more characters'
+    }
+
+    setErrors(errors)
+
+  }, [credential, password])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,34 +40,44 @@ function LoginFormModal() {
       });
   };
 
+  const demoUserLogin = (e) => {
+    e.preventDefault()
+    return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
+        .then(closeModal)
+}
+
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div id='login-form'>
+      <h1 className="title">Log In</h1>
+      <form id="login" onSubmit={handleSubmit}>
         <label>
-          Username or Email
+          <div className="username">Username or Email</div>
           <input
+            className="username-input"
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
           />
         </label>
+        {errors.credential && <p className='error'>{errors.credential}</p>}
         <label>
-          Password
+          <div className="password">Password</div>
           <input
+            className="password-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {errors.credential && (
-          <p>{errors.credential}</p>
-        )}
-        <button type="submit">Log In</button>
+        {errors.password && <p className='error'>{errors.password}</p>}
+        <div className="login-button">
+          <button  type="submit" disabled={Object.keys(errors).length > 0}>Log In</button>
+        </div>
       </form>
-    </>
+      <button className="demo-login-button" onClick={demoUserLogin}>Demo User Login</button>
+    </div>
   );
 }
 
