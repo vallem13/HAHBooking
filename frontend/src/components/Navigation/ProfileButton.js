@@ -48,8 +48,8 @@ function ProfileButton({ user }) {
     <>
       {user ? (<NavLink className="create-new-spot" exact to="/spots/new" >Create a New Spot</NavLink>) : ("")}
       <button id='login-button' onClick={openMenu}>
-        <span class="material-symbols-outlined">menu</span>
-        <span class="material-symbols-outlined">account_circle</span>
+        <span className="material-symbols-outlined">menu</span>
+        <span className="material-symbols-outlined">account_circle</span>
       </button>
       <ul id='user-session' className={ulClassName} ref={ulRef}>
         {user ? (
