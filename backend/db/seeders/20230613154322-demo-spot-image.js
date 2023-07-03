@@ -11,19 +11,231 @@ module.exports = {
     await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: 'https://media.architecturaldigest.com/photos/5a30296738bb817b7ffe1b4b/4:3/w_908,h_681,c_limit/Airbnb_Georgia3.jpg',
+        url: 'https://shorturl.at/fiFS2',
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: 'https://shorturl.at/gtHTY',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://shorturl.at/cyRZ0',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://shorturl.at/jxE07',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://t.ly/WJij-',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: 'https://t.ly/28qcK',
         preview: true
       },
       {
         spotId: 2,
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTau21tGb1nlbDCyQXRg5t4-GmsrGH-_j29BQ&usqp=CAU',
+        url: 'https://t.ly/SYxY',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: 'https://t.ly/lMFC',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: 'https://t.ly/neZ7',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: 'https://shorturl.at/pwAB3',
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: 'https://t.ly/6uRj',
         preview: true
       },
       {
         spotId: 3,
-        url: 'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+        url: 'https://t.ly/h3bzA',
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: 'https://t.ly/zLqb',
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: 'https://t.ly/MxCI',
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: 'https://t.ly/iRMoC',
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: 'https://t.ly/yEh8q',
         preview: true
+      },
+      {
+        spotId: 4,
+        url: 'https://t.ly/Rf7L',
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: 'https://t.ly/Wmzd',
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: 'https://t.ly/ca7w',
+        preview: false
+      },
+      {
+        spotId: 4,
+        url: 'https://t.ly/Gl85',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://t.ly/HYjZ7',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: 'https://t.ly/vwHL',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://t.ly/Bpf_h',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://t.ly/knDI',
+        preview: false
+      },
+      {
+        spotId: 5,
+        url: 'https://t.ly/UKMZX',
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: 'https://t.ly/wS17',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: 'https://t.ly/nUQFG',
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: 'https://t.ly/MYIx',
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: 'https://t.ly/pftL',
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: 'https://t.ly/Q8Ja',
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: 'https://t.ly/J2pc',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: 'https://t.ly/WeLx',
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: 'https://t.ly/z0LAk',
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: 'https://t.ly/XRus',
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: 'https://t.ly/t45L',
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: 'https://t.ly/fyKQj',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: 'https://t.ly/SunDg',
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: 'https://t.ly/bfVu',
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: 'https://t.ly/eb1OO',
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: 'https://t.ly/khoz',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://t.ly/Ndju',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: 'https://t.ly/hbha',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://t.ly/Oxqk',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://t.ly/0Zu1',
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: 'https://t.ly/givET',
+        preview: false
       }
+
+
     ], {})
   },
 
