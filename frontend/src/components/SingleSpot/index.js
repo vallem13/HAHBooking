@@ -32,3 +32,5 @@ const SingleSpot = ({ spot }) => {
 
 
 export default SingleSpot;
+
+
