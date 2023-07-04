@@ -1,9 +1,5 @@
 .singleSpot {
     border: 3px solid black;
-    margin: 300px;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-
 }
 
 .previewImage {

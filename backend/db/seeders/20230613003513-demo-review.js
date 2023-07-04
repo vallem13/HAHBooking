@@ -9,112 +9,112 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
     await queryInterface.bulkInsert(options, [
-      {
-        spotId: 1,
-        userId: 5,
-        review: '',
-        stars: 5
-      },
-      {
-        spotId: 1,
-        userId: 4,
-        review: '',
-        stars: 4
-      },
+      // {
+      //   spotId: 1,
+      //   userId: 5,
+      //   review: 'Amazing spot! Perfect for 2!',
+      //   stars: 5
+      // },
+      // {
+      //   spotId: 1,
+      //   userId: 4,
+      //   review: 'Loved it! Nothing like a night in the woods. Very cozy!',
+      //   stars: 4
+      // },
       {
         spotId: 2,
         userId: 3,
-        review: '',
+        review: 'Enjoyed it.',
         stars: 3
       },
       {
         spotId: 2,
         userId: 2,
-        review: '',
+        review: 'Beautiful place! lots to do.',
         stars: 5
       },
       {
         spotId: 3,
         userId: 5,
-        review: '',
+        review: 'We had an amazing time.',
         stars: 4
       },
       {
         spotId: 3,
         userId: 4,
-        review: '',
+        review: 'Everything was great, just like the pictures.',
         stars: 5
       },
       {
         spotId: 4,
         userId: 5,
-        review: '',
+        review: 'The place was nice but the host was awful!',
         stars: 1
       },
       {
         spotId: 4,
         userId: 4,
-        review: '',
+        review: 'Nice spot with an amazing host!',
         stars: 5
       },
       {
         spotId: 5,
         userId: 3,
-        review: '',
+        review: 'Nice place!',
         stars: 4
       },
       {
         spotId: 5,
         userId: 1,
-        review: '',
+        review: 'Would totally reserve this spot again. Everything was great!',
         stars: 5
       },
       {
         spotId: 6,
         userId: 5,
-        review: '',
+        review: 'Nice place in a beautiful area!',
         stars: 4
       },
       {
         spotId: 6,
         userId: 4,
-        review: '',
+        review: 'The host was the worst! I complained but never responded.',
         stars: 2
       },
       {
         spotId: 7,
         userId: 5,
-        review: '',
+        review: 'Definitely coming back here!',
         stars: 5
       },
       {
         spotId: 7,
         userId: 4,
-        review: '',
+        review: 'Lovely stay! I recommend it!',
         stars: 4
       },
       {
         spotId: 8,
         userId: 2,
-        review: '',
+        review: 'You wont be dissappointed!',
         stars: 5
       },
       {
         spotId: 8,
         userId: 1,
-        review: '',
+        review: 'Five out of five! You wont regret it promise!',
         stars: 5
       },
       {
         spotId: 9,
         userId: 5,
-        review: '',
+        review: 'Not so sure... PLace is nice but there werre a few things that the host could have done bettter.',
         stars: 3
       },
       {
         spotId: 9,
         userId: 4,
-        review: '',
+        review: 'IN LOVE!',
         stars: 5
       }
     ], {})

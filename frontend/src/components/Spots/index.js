@@ -17,7 +17,7 @@ const SpotsIndex = () => {
     if (!spots.length) return null
 
     return (
-        <div>
+        <div className='allSpots'>
             {spots.map((spot) => (
                 <SingleSpot key={spot.id} spot={spot}/>
             ))}
