@@ -6,6 +6,7 @@ import { thunkGetSpotReviews } from "../../store/reviews"
 import OpenModalButton from '../OpenModalButton'
 import ReserveFormModal from '../ReserveFormModal'
 import DeleteReviewModal from "./DeleteReviewModal"
+//import SingleSpotReviews from '../SingleSpotReviews'
 import "./SingleSpotDetails.css";
 
 const SingleSpotDetails = () => {
@@ -42,7 +43,7 @@ const SingleSpotDetails = () => {
         const month = event.toLocaleString('default', { month: 'long' });
         const year = event.toLocaleString('default', { year: 'numeric' });
         return `${month} ${year}`
-      }
+    }
 
     return (
         <>
@@ -97,6 +98,7 @@ const SingleSpotDetails = () => {
                     </div>
                 }
             </div>
+
         </>
     )
 }
