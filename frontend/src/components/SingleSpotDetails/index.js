@@ -19,15 +19,15 @@ const SingleSpotDetails = () => {
     const spotArr = Object.keys(spot)
     const reviewsArr = Object.values(reviews).reverse();
 
-    console.log("all reviews ----->", reviews)
-    console.log("reviews Array ---->", reviewsArr)
+    // console.log("all reviews ----->", reviews)
+    // console.log("reviews Array ---->", reviewsArr)
 
     useEffect(() => {
         dispatch(thunkGetSingleSpot(spotId))
     }, [dispatch, spotId])
 
     useEffect(() => {
-        console.log(dispatch(thunkGetSpotReviews(spotId)))
+        dispatch(thunkGetSpotReviews(spotId))
     }, [dispatch, spotId])
 
     if (spotArr.length < 1) return null

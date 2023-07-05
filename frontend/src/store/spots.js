@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_ALL_SPOTS = 'spots/ALL-SPOTS-landing-page'
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT-spotId'
+const DELETE_SPOT = 'spots/DELETE-SPOT-spotId'
 
 const getAllSpots = (spots) => {
     return {
@@ -14,6 +15,13 @@ const getSingleSpot = (spot) => {
     return {
         type: GET_SINGLE_SPOT,
         payload: spot
+    }
+}
+
+const deleteSingleSpot = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        spotId
     }
 }
 
@@ -36,6 +44,17 @@ export const thunkGetSingleSpot = (spotId) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteSingleSpot = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deleteSingleSpot(spotId))
+        return data
+    }
+}
+
 const initialState = { allSpots: {}, singleSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
@@ -53,9 +72,16 @@ const spotsReducer = (state = initialState, action) => {
         return newState;
 
         case GET_SINGLE_SPOT:
-            newState = { ...state, singleSpot: {} }
+            newState = { ...state, singleSpot: {}}
             newState.singleSpot = action.payload
-            return newState
+
+        return newState
+
+        case DELETE_SPOT:
+            newState = { ...state, allSpots: { ...state.allSpots}, singleSpot: {}}
+            delete newState.allSpots[action.spotId]
+
+        return newState
 
         default:
             return state;
