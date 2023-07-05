@@ -22,7 +22,7 @@ const SingleSpot = ({ spot }) => {
                     <div className={spot.averageRating ? 'rating' : 'new-rating'}>
                         <span class="material-symbols-outlined">hotel_class</span>
                         {spot.averageRating ? spot.averageRating : 'New!'}</div>
-                    <div>${spot.price} per night</div>
+                    <div>${Number(spot.price).toFixed(2)} per night</div>
                 </div>
             </div>
         </>
@@ -32,5 +32,3 @@ const SingleSpot = ({ spot }) => {
 
 
 export default SingleSpot;
-
-
