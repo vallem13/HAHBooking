@@ -44,7 +44,9 @@ function LoginFormModal() {
     e.preventDefault()
     return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
         .then(closeModal)
-}
+  }
+
+
 
   return (
     <div id='login-form'>
@@ -73,7 +75,7 @@ function LoginFormModal() {
         </label>
         {errors.password && <p className='error-login'>{errors.password}</p>}
         <div className="login-button">
-          <button  type="submit" disabled={Object.keys(errors).length > 0}>Log In</button>
+          <button type="submit" disabled={Object.keys(errors).length > 0}>Log In</button>
         </div>
       </form>
       <button className="demo-login-button" onClick={demoUserLogin}>Demo User Login</button>
