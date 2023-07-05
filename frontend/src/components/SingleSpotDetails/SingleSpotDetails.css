@@ -1,0 +1,64 @@
+.singleSpotDetails {
+    display: block;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* border: 1px solid red; */
+}
+
+.singleSpott-allImg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.single-prevImg {
+    height: 625px;
+    width: 840px;
+    padding-left: 100px;
+    padding-top: 10px;
+}
+
+.single-allImg {
+    height: 300px;
+    width: 400px;
+    padding: 10px;
+}
+
+.single-name {
+    padding-left: 100px;
+}
+
+.single-details {
+    padding-left: 100px;
+    padding-right: 120px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 40px;
+
+}
+
+.reserve-box {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 40px 40px;
+}
+
+.reserve-price-rating {
+    display: flex;
+    column-gap: 50px;
+    padding-bottom: 20px;
+}
+
+.reserve-button {
+    display: flex;
+}
+
+.reserve-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.singleSpot-reviews {
+    /* padding-left: 100px; */
+    margin: 100px;
+    border-top: 1px solid black;
+}

@@ -46,38 +46,47 @@ const SingleSpotDetails = () => {
     }
 
     return (
-        <>
-            <h1>{name}</h1>
-            <div>
-                <img src={previewImg.url} alt={name}></img>
+        <div className='singleSpotDetails'>
+            <div className='single-name'>
+                <h1>{name}</h1>
+                <h2>{city}, {state}, {country}</h2>
+            </div>
+            <div className='singleSpott-allImg'>
+                <div >
+                    <img className='single-prevImg' src={previewImg.url} alt={name}></img>
+                </div>
+                <div >
+                    {allImages.map(image =>
+                    <img className='single-allImg' key={image.id} src={image.url} alt={name}></img>)}
+                </div>
+            </div>
+            <div className='single-details'>
+                <div>
+                    <h1>Hosted by: {Owner.firstName} {Owner.lastName}</h1>
+                    <h2>Description: {description}</h2>
+                </div>
+                <div className='reserve-box'>
+                    <div className='reserve-price-rating'>
+                    <h2>${price} night</h2>
+                    {reviewsArr.length ?
+                        <div>
+                            <h3 className='reserve-rating'><span class="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
+                        </div>
+                        :
+                        <div>
+                            <h3 className='reserve-rating'><span class="material-symbols-outlined">star_rate</span>New</h3>
+                        </div>
+                    }</div>
+                    <OpenModalButton className='reserve-button' buttonText='Reserve' modalComponent={<ReserveFormModal />} />
+                </div>
             </div>
             <div>
-                {allImages.map(image =>
-                <img key={image.id} src={image.url} alt={name}></img>)}
-            </div>
-            <h2>{city} · {state} · {country}</h2>
-            <h3>Description: {description}</h3>
-            <h3>Hosted by: {Owner.firstName} {Owner.lastName}</h3>
-            <div>
-                <h2>${price} per night</h2>
                 {reviewsArr.length ?
-                    <div>
-                        <h3><span className="material-symbols-outlined">hotel_class</span> {averageRating} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
-                    </div>
-                    :
-                    <div>
-                        <h3><span className="material-symbols-outlined">hotel_class</span>New</h3>
-                    </div>
-                }
-                <OpenModalButton buttonText='Reserve' modalComponent={<ReserveFormModal />} />
-            </div>
-            <div>
-                {reviewsArr.length ?
-                    <div>
-                        <h3><span className="material-symbols-outlined">hotel_class</span> {averageRating} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
+                    <div className='singleSpot-reviews'>
+                        <h1 className='reserve-rating'><span class="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h1>
                         {reviewsArr.map((review) => (
                             <div>
-                                <h4>{review.User.firstName}</h4>
+                                <h3>{review.User.firstName}</h3>
                                 <p>{getDate(review.createdAt)}</p>
                                 <p>{review.review}</p>
                                 {(review.userId === user?.id) &&
@@ -98,8 +107,7 @@ const SingleSpotDetails = () => {
                     </div>
                 }
             </div>
-
-        </>
+        </div>
     )
 }
 

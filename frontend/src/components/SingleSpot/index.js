@@ -18,11 +18,11 @@ const SingleSpot = ({ spot }) => {
             <div classsName='location-rating'>
                 <div className='city-state'>{spot.city}, {spot.state}</div>
                 <div className='rating'>
-                    <span class="material-symbols-outlined">hotel_class</span>
+                    <span class="material-symbols-outlined">star_rate</span>
                     {spot.averageRating ? spot.averageRating : 'New!'}
                 </div>
             </div>
-            <div>${Number(spot.price).toFixed(2)} per night</div>
+            <div>${Number(spot.price).toFixed(2)} night</div>
         </div>
     )
 
