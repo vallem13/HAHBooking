@@ -14,11 +14,13 @@ const SingleSpotDetails = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const spot = useSelector(state => state.spots.singleSpot);
-    const reviews = useSelector(state => (state.reviews.singleSpot));
+    const reviews = useSelector(state => state.reviews.singleSpot);
     const user = useSelector(state => state.session.user)
     const spotArr = Object.keys(spot)
-    const reviewsArr = reviews ? Object.values(reviews).reverse() : [];
+    const reviewsArr = Object.values(reviews).reverse();
 
+    // console.log("all reviews ----->", reviews)
+    // console.log("reviews Array ---->", reviewsArr)
 
     useEffect(() => {
         dispatch(thunkGetSingleSpot(spotId))
@@ -70,11 +72,11 @@ const SingleSpotDetails = () => {
                     <h2>${price} night</h2>
                     {reviewsArr.length ?
                         <div>
-                            <h3 className='reserve-rating'><span class="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
+                            <h3 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
                         </div>
                         :
                         <div>
-                            <h3 className='reserve-rating'><span class="material-symbols-outlined">star_rate</span>New</h3>
+                            <h3 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>New</h3>
                         </div>
                     }</div>
                     <OpenModalButton className='reserve-button' buttonText='Reserve' modalComponent={<ReserveFormModal />} />
@@ -83,7 +85,7 @@ const SingleSpotDetails = () => {
             <div>
                 {reviewsArr.length ?
                     <div className='singleSpot-reviews'>
-                        <h1 className='reserve-rating'><span class="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h1>
+                        <h1 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h1>
                         {reviewsArr.map((review) => (
                             <div>
                                 <h3>{review.User.firstName}</h3>
