@@ -19,15 +19,15 @@ const SingleSpotDetails = () => {
     const spotArr = Object.keys(spot)
     const reviewsArr = Object.values(reviews).reverse();
 
-    // console.log("all reviews ----->", reviews)
-    // console.log("reviews Array ---->", reviewsArr)
+    console.log("all reviews ----->", reviews)
+    console.log("reviews Array ---->", reviewsArr)
 
     useEffect(() => {
         dispatch(thunkGetSingleSpot(spotId))
     }, [dispatch, spotId])
 
     useEffect(() => {
-        dispatch(thunkGetSpotReviews(spotId))
+        console.log(dispatch(thunkGetSpotReviews(spotId)))
     }, [dispatch, spotId])
 
     if (spotArr.length < 1) return null
@@ -77,8 +77,8 @@ const SingleSpotDetails = () => {
                         :
                         <div>
                             <h3 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>New</h3>
-                        </div>
-                    }</div>
+                        </div>}
+                    </div>
                     <OpenModalButton className='reserve-button' buttonText='Reserve' modalComponent={<ReserveFormModal />} />
                 </div>
             </div>
