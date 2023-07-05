@@ -45,21 +45,23 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
-      {user ? (<NavLink className="create-new-spot" exact to="/spots/new" >Create a New Spot</NavLink>) : ("")}
-      <button id='login-button' onClick={openMenu}>
-        <span className="material-symbols-outlined">menu</span>
-        <span className="material-symbols-outlined">account_circle</span>
-      </button>
+    <div>
+      <div className="user-navigation">
+        {user ? (<NavLink className="create-new-spot" exact to="/spots/new" >Create a New Spot</NavLink>) : ("")}
+        <button id='login-button' onClick={openMenu}>
+          <span className="material-symbols-outlined">menu</span>
+          <span className="material-symbols-outlined">account_circle</span>
+        </button>
+      </div>
       <ul id='user-session' className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>Hello, {user.firstName}</li>
-            <li>{user.email}</li>
-            <li>
+            <li className="user-menu">Hello, {user.firstName}</li>
+            <li className="user-menu">{user.email}</li>
+            <li className="user-menu">
             <NavLink className="manage-spots" exact to="/spots/current" >Manage Spots</NavLink>
             </li>
-            <li>
+            <li className="user-menu">
               <button onClick={logout}>Log Out</button>
             </li>
           </>
@@ -78,7 +80,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 

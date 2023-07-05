@@ -9,25 +9,23 @@
 }
 
 #Navigation-Bar {
+    /* border: 1px solid red; */
+    border-bottom: 1px solid grey;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 20px;
-    padding-left: 20px;
-    top: 10px;
-    left: 10px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .session {
     list-style-type: none;
-
 }
 
 #menu-drop {
     list-style-type: none;
-    
-
-
 }
 
 #user-session {
@@ -35,5 +33,31 @@
     position: absolute;
     right: 30px;
     border: 1px solid black;
-    padding: 10px 10px;
+    padding: 20px 20px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.user-menu {
+    padding: 5px;
+}
+
+#login-button {
+    cursor: pointer;
+}
+
+.create-new-spot {
+    /* border: 1px solid black; */
+    padding-right: 10px;
+    font-size: larger;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.user-navigation {
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
 }

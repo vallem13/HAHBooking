@@ -1,9 +1,28 @@
 .singleSpot {
-    border: 3px solid black;
+
+    height: 400px;
+    width: 400px;
+    cursor: pointer;
 }
 
-.previewImage {
-    width: 230px;
-    height: 200px;
+.name-image {
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.singleImage{
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.location-rating {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.city-state {
+    display: flex;
+
 }

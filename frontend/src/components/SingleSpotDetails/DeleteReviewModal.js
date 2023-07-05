@@ -1,6 +1,5 @@
 import { useModal } from '../../context/Modal'
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { thunkDeleteReview } from '../../store/reviews';
 import { thunkGetSingleSpot } from '../../store/spots';
 import './DeleteReviewModal.css'
@@ -8,14 +7,16 @@ import './DeleteReviewModal.css'
 const DeleteReviewModal = ({ spotId, reviewId }) => {
 
     const { closeModal } = useModal()
-    const history = useHistory()
     const dispatch = useDispatch()
 
-    const deleteReview = () => {
-        dispatch(thunkDeleteReview(reviewId))
+    const reload = window.location.reload()
+
+    const deleteReview = (e) => {
+        e.prevent()
+        return dispatch(thunkDeleteReview(reviewId))
         .then(() => dispatch(thunkGetSingleSpot(spotId)))
-        //history.push(`/spots/${spotId}`)
         .then(closeModal)
+        .then(reload())
     };
 
     const dontDeleteReview = () => {
@@ -33,6 +34,3 @@ const DeleteReviewModal = ({ spotId, reviewId }) => {
 }
 
 export default DeleteReviewModal
-
-
-//

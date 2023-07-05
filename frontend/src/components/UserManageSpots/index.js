@@ -36,7 +36,6 @@ const UserManageSpots = () => {
             </div>
         </div>
     )
-
 }
 
 

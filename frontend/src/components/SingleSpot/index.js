@@ -9,23 +9,21 @@ const SingleSpot = ({ spot }) => {
         history.push(`/spots/${spot.id}`)
     }
 
-
     return (
-        <>
-            <div className='singleSpot' onClick={getSpotById} >
-                <div>
-                    <div>{spot.name}</div>
-                    <img className='previewImage' src={spot.previewImage} alt={spot.name} title={spot.name}></img>
-                </div>
-                <div>
-                    <div>{spot.city}, {spot.state}</div>
-                    <div className={spot.averageRating ? 'rating' : 'new-rating'}>
-                        <span class="material-symbols-outlined">hotel_class</span>
-                        {spot.averageRating ? spot.averageRating : 'New!'}</div>
-                    <div>${Number(spot.price).toFixed(2)} per night</div>
+        <div className='singleSpot' onClick={getSpotById} >
+            <div className='name-image'>
+                <h3 className='name'>{spot.name}</h3>
+                <img className='singleImage' src={spot.previewImage} alt={spot.name} title={spot.name}></img>
+            </div>
+            <div classsName='location-rating'>
+                <div className='city-state'>{spot.city}, {spot.state}</div>
+                <div className='rating'>
+                    <span class="material-symbols-outlined">hotel_class</span>
+                    {spot.averageRating ? spot.averageRating : 'New!'}
                 </div>
             </div>
-        </>
+            <div>${Number(spot.price).toFixed(2)} per night</div>
+        </div>
     )
 
 }
