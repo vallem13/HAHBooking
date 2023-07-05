@@ -9,14 +9,13 @@ const DeleteReviewModal = ({ spotId, reviewId }) => {
     const { closeModal } = useModal()
     const dispatch = useDispatch()
 
-    const reload = window.location.reload()
+    //const reload = window.location.reload()
 
-    const deleteReview = (e) => {
-        e.prevent()
-        return dispatch(thunkDeleteReview(reviewId))
+    const deleteReview = () => {
+        dispatch(thunkDeleteReview(reviewId))
         .then(() => dispatch(thunkGetSingleSpot(spotId)))
         .then(closeModal)
-        .then(reload())
+        //return (reload())
     };
 
     const dontDeleteReview = () => {
