@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const GET_SPOT_REVIEWS = 'reviews/GET_SPOT_REVIEWS-spotId'
+const DELETE_REVIEW = 'reviews/DELETE_REVIEW-reviewId'
 
 const getSpotReviews = (reviews) => {
     return {
@@ -8,6 +9,13 @@ const getSpotReviews = (reviews) => {
         reviews
     };
 };
+
+const deleteReview = (reviewId) => {
+    return {
+        type: DELETE_REVIEW,
+        reviewId
+    }
+}
 
 export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
@@ -20,6 +28,15 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
         return errors
     }
 };
+
+export const thunkDeleteReview = (reviewId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        dispatch(deleteReview(reviewId))
+    }
+}
 
 const initialState = { singleSpot: {}, user: {} };
 
@@ -38,6 +55,11 @@ const reviewsReducer = (state = initialState, action) => {
             console.log(newState)
 
         return newState;
+
+        case DELETE_REVIEW:
+            newState = { ...state, singleSpot: {}}
+            delete newState.singleSpot[action.reviewId]
+        return newState
 
         default:
             return state;

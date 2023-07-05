@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { thunkGetSingleSpot } from "../../store/spots";
 import { thunkGetSpotReviews } from "../../store/reviews"
-import SingleSpotReviews from '../SingleSpotReviews';
 import OpenModalButton from '../OpenModalButton'
 import ReserveFormModal from '../ReserveFormModal'
+import DeleteReviewModal from "./DeleteReviewModal"
 import "./SingleSpotDetails.css";
 
 const SingleSpotDetails = () => {
@@ -76,15 +76,24 @@ const SingleSpotDetails = () => {
                         <h3><span className="material-symbols-outlined">hotel_class</span> {averageRating} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
                         {reviewsArr.map((review) => (
                             <div>
-                                <h4>{review.User.firstName} {review.User.lastName}</h4>
+                                <h4>{review.User.firstName}</h4>
                                 <p>{getDate(review.createdAt)}</p>
                                 <p>{review.review}</p>
+                                {(review.userId === user?.id) &&
+                                    <div>
+                                        <OpenModalButton
+                                            buttonText="Delete Review"
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spot.id} />}
+                                        />
+                                    </div>
+                                }
                             </div>
                         ))}
                     </div>
                     :
                     <div>
                         <h3><span className="material-symbols-outlined">hotel_class</span>New</h3>
+                        <h4>Be the first to post a review!</h4>
                     </div>
                 }
             </div>
