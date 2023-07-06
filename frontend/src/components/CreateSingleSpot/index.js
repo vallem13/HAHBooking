@@ -71,8 +71,8 @@ const CreateSingleSpot = () => {
 
         if(!Object.values(errors).length) {
             imgURLs.forEach((img, index) => {
-                const obj = { url: img, preview: index === 0 };
-                if (img) imgArr.push(obj);
+                const previewImage = { url: img, preview: index === 0 };
+                if (img) imgArr.push(previewImage);
             });
             const addSpot = await dispatch(thunkCreateSingleSpot(newSpot, imgArr, user))
             const allErrors = { ...errors, Errors: addSpot.errors }
