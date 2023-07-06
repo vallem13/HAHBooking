@@ -33,10 +33,11 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     })
-
+    if (response.ok) {
         const data = await response.json()
         dispatch(deleteReview(reviewId))
         return data
+    }
 }
 
 const initialState = { singleSpot: {}, user: {} };

@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = 'spots/ALL-SPOTS-landing-page'
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT-spotId'
 const DELETE_SPOT = 'spots/DELETE-SPOT-spotId'
+const CREATE_SINGLE_SPOT = 'spots/CREATE_SINGLE_SPOT-new'
 
 const getAllSpots = (spots) => {
     return {
@@ -22,6 +23,13 @@ const deleteSingleSpot = (spotId) => {
     return {
         type: DELETE_SPOT,
         spotId
+    }
+}
+
+const createSingleSpot = (spot) => {
+    return {
+        type: CREATE_SINGLE_SPOT,
+        spot
     }
 }
 
@@ -55,6 +63,42 @@ export const thunkDeleteSingleSpot = (spotId) => async (dispatch) => {
     }
 }
 
+export const thunkCreateSingleSpot = (spot, spotImages, user) => async (dispatch) => {
+    const response = await csrfFetch('/api/spots', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(spot)
+    });
+    if (response.ok) {
+        const newSpot = await response.json();
+        await dispatch(thunkAddImage(newSpot, spotImages, user))
+        return newSpot;
+    } else {
+      const errors = await response.json();
+      return errors
+    }
+}
+
+export const thunkAddImage = (spot, spotImages, user) => async (dispatch) => {
+    spot.SpotImages = []
+    for (let i = 0; i < spotImages.length; i++) {
+        const image = spotImages[i]
+        const response = await csrfFetch(`/api/spots/${spot.id}/images`, {
+        method: 'POST',
+        body: JSON.stringify(image)
+        });
+        if (response.ok) {
+            const newImage = await response.json();
+            spot.SpotImages.push(newImage)
+        }
+    }
+    // spot.Owner = user;
+    // spot.numReviews = null;
+    // spot.averageRating = null;
+    // dispatch(createSingleSpot(spot));
+    // return spot
+}
+
 const initialState = { allSpots: {}, singleSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
@@ -80,6 +124,14 @@ const spotsReducer = (state = initialState, action) => {
         case DELETE_SPOT:
             newState = { ...state, allSpots: { ...state.allSpots}, singleSpot: {}}
             delete newState.allSpots[action.spotId]
+
+        return newState
+
+        case CREATE_SINGLE_SPOT:
+            newState = { ...state, allSpots: { ...state.allSpots}}
+            const spot = action.spot
+            newState.singleSpot = spot
+            newState.allSpots[spot.id] = spot
 
         return newState
 

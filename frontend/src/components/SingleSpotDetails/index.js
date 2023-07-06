@@ -34,11 +34,8 @@ const SingleSpotDetails = () => {
 
     const { name, city, state, country, description, Owner, SpotImages, price, averageRating, numReviews } = spot
 
-    let previewImg = [];
-    let allImages = [];
-
-    previewImg = SpotImages.find(image => image.preview === true)
-    allImages = SpotImages.filter(image => image.preview === false)
+    let previewImg = SpotImages.find(image => image.preview === true)
+    let allImages = SpotImages.filter(image => image.preview === false)
 
     const getDate = (date) => {
         const event = new Date(date);
