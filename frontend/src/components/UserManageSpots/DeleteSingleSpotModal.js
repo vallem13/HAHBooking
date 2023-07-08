@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { thunkDeleteSingleSpot } from '../../store/spots';
 import './DeleteSingleSpotModal.css'
 
-const DeleteSingleSpotModal = ({ spotId }) => {
+const DeleteSingleSpotModal = ({ spot, user, spotId }) => {
     const { closeModal } = useModal()
     const dispatch = useDispatch()
 

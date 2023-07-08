@@ -4,6 +4,7 @@ const GET_ALL_SPOTS = 'spots/ALL-SPOTS-landing-page'
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT-spotId'
 const DELETE_SPOT = 'spots/DELETE-SPOT-spotId'
 const CREATE_SINGLE_SPOT = 'spots/CREATE_SINGLE_SPOT-new'
+const EDIT_SINGLE_SPOT = 'spots/EDIT_SPOT-edit'
 
 const getAllSpots = (spots) => {
     return {
@@ -15,7 +16,7 @@ const getAllSpots = (spots) => {
 const getSingleSpot = (spot) => {
     return {
         type: GET_SINGLE_SPOT,
-        payload: spot
+        spot
     }
 }
 
@@ -32,6 +33,13 @@ const createSingleSpot = (spot) => {
         spot
     }
 }
+
+// const editSingleSpot = (spotId) => {
+//     return {
+//         type: EDIT_SINGLE_SPOT,
+//         spotId
+//     }
+// }
 
 export const thunkGetAllSpots = () => async (dispatch) => {
     const response = await csrfFetch("/api/spots");
@@ -89,6 +97,22 @@ export const thunkAddImage = (spot, spotImages, user) => async (dispatch) => {
     }
 }
 
+export const thunkEditSingleSpot = (spot, spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(spot)
+    })
+    if (response.ok) {
+        const editSpot = await response.json()
+        dispatch(createSingleSpot(spot))
+        return editSpot
+    } else {
+        const errors = response.json()
+        return errors
+    }
+}
+
 const initialState = { allSpots: {}, singleSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
@@ -106,8 +130,8 @@ const spotsReducer = (state = initialState, action) => {
         return newState;
 
         case GET_SINGLE_SPOT:
-            newState = { ...state, singleSpot: {}}
-            newState.singleSpot = action.payload
+            newState = { ...state, allSpots: {}, singleSpot: {}}
+            newState.singleSpot = action.spot
 
         return newState
 
@@ -122,6 +146,12 @@ const spotsReducer = (state = initialState, action) => {
             const spot = action.spot
             newState.singleSpot = spot
             newState.allSpots[spot.id] = spot
+
+        return newState
+
+        case EDIT_SINGLE_SPOT:
+            newState = { ...state, allSpots: { ...state.allSpots}}
+            newState.allSpots[action.spot.id] = action.spot
 
         return newState
 

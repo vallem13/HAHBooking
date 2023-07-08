@@ -29,6 +29,10 @@ const UserManageSpots = () => {
         history.push('/spots/new')
     }
 
+    const editSpot = (spotId) => {
+        history.push(`/spots/${spotId}/edit`)
+    }
+
     return (
         <>
             <div>
@@ -39,8 +43,10 @@ const UserManageSpots = () => {
                 {userSpots.map(spot =>(
                         <div>
                             <SingleSpot key={spot.id} manage={true} spot={spot} />
-                            
+
                             <OpenModalButton buttonText="Delete Spot" modalComponent={<DeleteSingleSpotModal spotId={spot.id}/>}/>
+
+                            <button onClick={() => editSpot(spot.id)}>Update</button>
                         </div>
                     )
                 )}

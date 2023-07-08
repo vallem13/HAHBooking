@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { thunkCreateSingleSpot } from "../../store/spots"
+import { thunkEditSingleSpot } from "../../store/spots"
 
-const CreateSingleSpotForm = () => {
+const EditSingleSpotForm = ({ spot }) => {
+
+    console.log('-------->form', spot)
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const user = useSelector(state => state.session.user)
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
-    const [lat, setLat] = useState(34.100570)
-    const [lng, setLng] = useState(118.611930)
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [prevImg, setPrevImg] = useState('')
-    const [img1, setImg1] = useState('')
-    const [img2, setImg2] = useState('')
-    const [img3, setImg3] = useState('')
-    const [img4, setImg4] = useState('')
+    const [address, setAddress] = useState(spot?.address)
+    const [city, setCity] = useState(spot?.city)
+    const [state, setState] = useState(spot?.state)
+    const [country, setCountry] = useState(spot?.country)
+    const [lat] = useState(34.100570)
+    const [lng] = useState(118.611930)
+    const [name, setName] = useState(spot.name)
+    const [description, setDescription] = useState(spot?.description)
+    const [price, setPrice] = useState(spot?.price)
     const [errors, setErrors] = useState({})
     const [submitted, setSubmitted] = useState(false)
 
@@ -34,18 +30,14 @@ const CreateSingleSpotForm = () => {
         if (!state) errors.state = 'Please enter valid state'
         if (!country) errors.country = 'Please enter a valid country'
         if (!name) errors.name = 'Please enter a valid name'
+        if (!description || description.length < 30) errors.description = 'Please describe your spot'
         if (!price || price <= 0) errors.price = 'Please enter a valid price number'
-        if (!description) errors.description = 'Please describe your spot'
-        if (prevImg && !prevImg.endsWith('png') && !prevImg.endsWith('jpg') && !prevImg.endsWith('jpeg')) errors.prevImg = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
-        if (img1 && !img1.endsWith('png') && !img1.endsWith('jpg') && !img1.endsWith('jpeg')) errors.img1 = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
-        if (img2 && !img2.endsWith('png') && !img2.endsWith('jpg') && !img2.endsWith('jpeg')) errors.img2 = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
-        if (img3 && !img3.endsWith('png') && !img3.endsWith('jpg') && !img3.endsWith('jpeg')) errors.img3 = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
-        if (img4 && !img4.endsWith('png') && !img4.endsWith('jpg') && !img4.endsWith('jpeg')) errors.img4 = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
 
         setErrors(errors)
-    }, [address, city, state, country, name, description, price, prevImg, img1, img2, img3, img4])
 
-    if (!user) {
+    }, [address, city, state, country, name, description, price])
+
+    if (!spot) {
         history.push('/')
     }
 
@@ -53,8 +45,6 @@ const CreateSingleSpotForm = () => {
 
         e.preventDefault()
         setSubmitted(true)
-
-        const imgURLs = [prevImg, img1, img2, img3, img4]
 
         const newSpot = {
             address,
@@ -68,18 +58,11 @@ const CreateSingleSpotForm = () => {
             price
         }
 
-        const imgArr = [];
-
         if(!Object.values(errors).length) {
-            imgURLs.forEach((img, index) => {
-                const previewImage = { url: img, preview: index === 0 };
-                if (img) imgArr.push(previewImage);
-            });
-            const addSpot = await dispatch(thunkCreateSingleSpot(newSpot, imgArr, user))
-            const allErrors = { ...errors, Errors: addSpot.errors }
+            const editSpot = await dispatch(thunkEditSingleSpot(newSpot, spot.id))
 
-            if (addSpot.errors) setErrors(allErrors)
-            else await history.push(`/spots/${addSpot.id}`)
+            if (editSpot.errors) setErrors(editSpot.errors)
+            else await history.push(`/spots/${spot.id}`)
         }
     }
 
@@ -88,7 +71,7 @@ const CreateSingleSpotForm = () => {
         <>
             <form className='createSpotForm' onSubmit={handleSubmit}>
 
-                <h1>Create a New Spot!</h1>
+                <h1>Update your Spot</h1>
 
                 <div className='createSpotTitle'>
 
@@ -100,7 +83,7 @@ const CreateSingleSpotForm = () => {
                         type="text"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
-                        placeholder='Country'
+                        placeholder={'Country'}
                     />
                     {errors.country && submitted && <p className='errorsForm'>{errors.country}</p>}
 
@@ -177,54 +160,7 @@ const CreateSingleSpotForm = () => {
 
                 </div>
 
-                <div className='createSpotTitle'>
-
-                    <h3>Liven up your spot with photos</h3>
-                    <p>Submit a link to at least one photo to publish your spot.</p>
-
-                    <input
-                        type="url"
-                        value={prevImg}
-                        onChange={(e) => setPrevImg(e.target.value)}
-                        placeholder='Preview Image URL'
-                    />
-                    {errors.prevImg && submitted && <p className='errorsForm'>{errors.prevImg}</p>}
-
-                    <input
-                        type="url"
-                        value={img1}
-                        onChange={(e) => setImg1(e.target.value)}
-                        placeholder='Image URL'
-                    />
-                    {errors.img1 && submitted && <p className='errorsForm'>{errors.img1}</p>}
-
-                    <input
-                        type="url"
-                        value={img2}
-                        onChange={(e) => setImg2(e.target.value)}
-                        placeholder='Image URL'
-                    />
-                    {errors.img2 && submitted && <p className='errorsForm'>{errors.img2}</p>}
-
-                    <input
-                        type="url"
-                        value={img3}
-                        onChange={(e) => setImg3(e.target.value)}
-                        placeholder='Image URL'
-                    />
-                    {errors.img3 && submitted && <p className='errorsForm'>{errors.img3}</p>}
-
-                    <input
-                        type="url"
-                        value={img4}
-                        onChange={(e) => setImg4(e.target.value)}
-                        placeholder='Image URL'
-                    />
-                    {errors.img4 && submitted && <p className='errorsForm'>{errors.img4}</p>}
-
-                </div>
-
-                <button type="submit">Create Spot</button>
+                <button type="submit">Update Spot</button>
 
             </form>
 
@@ -234,4 +170,4 @@ const CreateSingleSpotForm = () => {
 
 }
 
-export default CreateSingleSpotForm
+export default EditSingleSpotForm

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllSpots } from "../../store/spots";
 import SingleSpot from '../SingleSpot'
+import { clearReviews } from '../../store/reviews';
 import "./Spots.css";
 
 const SpotsIndex = () => {
@@ -12,6 +13,7 @@ const SpotsIndex = () => {
 
     useEffect(() => {
         dispatch(thunkGetAllSpots());
+        dispatch(clearReviews())
     }, [dispatch]);
 
     if (!spots.length) return null
