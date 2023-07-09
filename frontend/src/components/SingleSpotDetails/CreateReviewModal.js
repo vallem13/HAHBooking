@@ -18,7 +18,7 @@ const CreateSpotReviewModal = ({ spot, user }) => {
         let errors = {}
 
         if (stars < 1) errors.stars = "Stars can not be empty"
-        if (review.length < 10) errors.review = "Please enter a review"
+        if (review.length < 10) errors.review = "Review should be 10 characters or more"
 
         setErrors(errors)
 
@@ -48,7 +48,9 @@ const CreateSpotReviewModal = ({ spot, user }) => {
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                 />
-
+                {errors.review && review.length > 0 && (
+                    <p className='error-message'>{errors.review}</p>
+                )}
                 <div>
                     <div
                         onClick={(e) => setStars(1)}
@@ -85,6 +87,7 @@ const CreateSpotReviewModal = ({ spot, user }) => {
                     >
                         <i className="fa-solid fa-star medium-big-star clickable" ></i>
                     </div>
+                    <label>Stars</label>
                 </div>
                 <button type="submit" disabled={(review.length < 10) || !stars || Object.values(errors) < 0}>Submit Your Review</button>
             </div>

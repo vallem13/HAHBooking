@@ -5,6 +5,14 @@
     cursor: pointer;
 }
 
+.name {
+    visibility: hidden;
+}
+
+.singleSpot:hover .name {
+    visibility: visible
+}
+
 .name-image {
     border-radius: 10px;
     overflow: hidden;

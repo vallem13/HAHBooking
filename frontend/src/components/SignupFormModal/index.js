@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
@@ -14,6 +14,38 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  useEffect(() => {
+
+    const errors = {}
+
+    if (email.length < 0) {
+      errors.email = 'Please provide valid email'
+    }
+
+    if (username.length < 4) {
+      errors.username = 'Please provide valid username'
+    }
+
+    if (password.length < 6) {
+      errors.password = 'Passsword must be 6 or more characters'
+    }
+
+    if (firstName.length < 2) {
+      errors.firstName = 'First Name must be 2 or more characters'
+    }
+
+    if (lastName.length < 2) {
+      errors.lastName = 'Last Name must be 2 or more characters'
+    }
+
+    if (confirmPassword.length < 6) {
+      errors.confirmPassword = 'Please confirm your password'
+    }
+
+    setErrors(errors)
+
+  }, [email, username, password, firstName, lastName, confirmPassword])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +87,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p className="error-signup">{errors.email}</p>}
+        {errors.email && email.length > 0 && (
+          <p className='error-message'>{errors.email}</p>
+        )}
         <label>
           Username
           <input
@@ -66,7 +100,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p className="error-signup">{errors.username}</p>}
+        {errors.username && username.length > 0 && (
+          <p className='error-message'>{errors.username}</p>
+        )}
         <label>
           First Name
           <input
@@ -77,7 +113,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.firstName && <p className="error-signup">{errors.firstName}</p>}
+        {errors.firstName && firstName.length > 0 && (
+          <p className='error-message'>{errors.firstName}</p>
+        )}
         <label>
           Last Name
           <input
@@ -88,7 +126,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && <p className="error-signup">{errors.lastName}</p>}
+        {errors.lastName && lastName.length > 0 && (
+          <p className='error-message'>{errors.lastName}</p>
+        )}
         <label>
           Password
           <input
@@ -99,7 +139,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p className="error-signup">{errors.password}</p>}
+        {errors.password && password.length > 0 && (
+          <p className='error-message'>{errors.password}</p>
+        )}
         <label>
           Confirm Password
           <input
@@ -110,10 +152,10 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && (
-          <p className="error-signup">{errors.confirmPassword}</p>
+        {errors.confirmPassword && confirmPassword.length > 0 && (
+          <p className='error-message'>{errors.confirmPassword}</p>
         )}
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={Object.keys(errors).length > 0}>Sign Up</button>
       </form>
     </div>
   );

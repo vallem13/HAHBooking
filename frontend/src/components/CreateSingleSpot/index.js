@@ -36,6 +36,7 @@ const CreateSingleSpotForm = () => {
         if (!name) errors.name = 'Please enter a valid name'
         if (!price || price <= 0) errors.price = 'Please enter a valid price number'
         if (!description) errors.description = 'Please describe your spot'
+        if (!prevImg) errors.prevImg = 'Preview Image is required'
         if (prevImg && !prevImg.endsWith('png') && !prevImg.endsWith('jpg') && !prevImg.endsWith('jpeg')) errors.prevImg = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
         if (img1 && !img1.endsWith('png') && !img1.endsWith('jpg') && !img1.endsWith('jpeg')) errors.img1 = 'Please make sure your image extension ends with .png or .jpg or .jpeg'
         if (img2 && !img2.endsWith('png') && !img2.endsWith('jpg') && !img2.endsWith('jpeg')) errors.img2 = 'Please make sure your image extension ends with .png or .jpg or .jpeg'

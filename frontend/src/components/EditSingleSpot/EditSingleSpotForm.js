@@ -5,8 +5,6 @@ import { thunkEditSingleSpot } from "../../store/spots"
 
 const EditSingleSpotForm = ({ spot }) => {
 
-    console.log('-------->form', spot)
-
     const dispatch = useDispatch()
     const history = useHistory()
     const [address, setAddress] = useState(spot?.address)
