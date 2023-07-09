@@ -18,7 +18,7 @@ module.exports = {
         lat: 34.100570,
         lng: -118.611930,
         name: "The ATL Treehouse",
-        description: "The treehouse sits in a 400 yr old oak tree. 250 yr old beams support the structure floating 25ft in the air. Huge windows offering a view of the gardens. The privacy fence allows total seclusion. There is a composting toilet and vintage sink inside the treehouse.",
+        description: "The treehouse sits in a 400 yr old oak tree. 250 yr old beams support the structure floating 25ft in the air.",
         price: 279,
       },
       {
@@ -30,7 +30,7 @@ module.exports = {
         lat: 35.408669,
         lng: -80.579178,
         name: "Amazing ViewsCabin",
-        description: "Welcome to our bright and spacious Diamond in the Bluff cabin! Where memories of your vacation will last forever. The breathtaking mountain views offer lush trees in the summer, the changing colors of fall, snowcapped peaks in the winter and the colorful blossoms of spring, definitely a sight to see.",
+        description: "Welcome to our bright and spacious Diamond in the Bluff cabin! Where memories of your vacation will last forever.",
         price: 471,
       },
       {
@@ -54,7 +54,7 @@ module.exports = {
         lat: 33.531060,
         lng: -111.943130,
         name: "Alpen Ridge",
-        description: "Get direct access to the slopes with this premium Mountain Village listing. Cut the first tracks across a fresh snowfall by skiing out directly from the villa’s deck to the Bridges run, which touches the property. The villa’s snow-capped tower will guide you home after a packed day, with a bubbling hot tub, Alpine-style interiors and warm, welcoming and plushy-outfitted living spaces awaiting you.",
+        description: "Get direct access to the slopes with this premium Mountain Village listing.",
         price: 259,
       },
       {
@@ -66,7 +66,7 @@ module.exports = {
         lat: 34.502781,
         lng: -93.055656,
         name: "The Summit House",
-        description: "Welcome to The Summit House, a completely renovated A-Frame cabin less than 1 mile to downtown Stowe. Wake up to views of the morning light casting through the forest from your glass wall bedroom. Relax after a day exploring the mountains in the huge spa style rainfall shower. Settle down after dinner around the modern wood burning fireplace while watching your favorite shows on the 50' TV. It's not just a rental, it's an experience. The latest addition to the OM Home Residences collection.",
+        description: "Welcome to The Summit House, a completely renovated A-Frame cabin less than 1 mile to downtown Stowe.",
         price: 525,
       },
       {
@@ -78,7 +78,7 @@ module.exports = {
         lat: 34.502781,
         lng: -93.055656,
         name: "Hilltop Mansion Poconos",
-        description: "The East Coast's #1 Mansion sleeps 32! With 14 bedrooms and 10 bathrooms, Hilltop Mansion in the Poconos provides both Family and Corporate Gatherings plenty of space for sleeping and entertaining! Corporate Groups, ask about special off-peak midweek promotional offers such extra sleeping space.",
+        description: "The East Coast's #1 Mansion sleeps 32! With 14 bedrooms and 10 bathrooms, Hilltop Mansion in the Poconos provides both Family and Corporate Gatherings.",
         price: 3675,
       },
       {
@@ -90,7 +90,7 @@ module.exports = {
         lat: 34.502781,
         lng: -93.055656,
         name: "Unique & Private on 2 acres",
-        description: "Relax in this Light-Filled, Modern Home with walls of windows and backing to open space. 4000+ sqft w/ 3 living areas & 2 decks. Enjoy high-end mattresses, hot tub, sauna, heated garage & more! Fully equipped kitchen. Only 0.7 miles from Peak7 Base & mins to Main Street. Extra $50 per person/per night over 8 people. Pet allowed with prior approval. $250 fee per pet.",
+        description: "Relax in this Light-Filled, Modern Home with walls of windows and backing to open space. 4000+ sqft w/ 3 living areas & 2 decks.",
         price: 499,
       },
       {
@@ -102,7 +102,7 @@ module.exports = {
         lat: 34.502781,
         lng: -93.055656,
         name: "Scandinavian Chalet + Spa ",
-        description: "Welcome to Chalet Vintersaga, just minutes from Mont Tremblant Ski Resort. Located in a private luxurious resort community, this modern Scandinavian home was built in 2021 and is surrounded by breathtaking nature. This stunning 2-level family friendly home is ideal for guests seeking tranquility near the heart of the action. It features a fully equipped gourmet kitchen, 4 bedrooms - each with an ensuite bathroom, a fireplace, a spa, 2 large patios with panoramic views, washer and dryer, and much more.",
+        description: "Welcome to Chalet Vintersaga, just minutes from Mont Tremblant Ski Resort.",
         price: 447,
       },
       {
@@ -114,7 +114,7 @@ module.exports = {
         lat: 34.502781,
         lng: -93.055656,
         name: "Deer Valley Mountain Villa",
-        description: "Welcome to the grandeur of this exquisite ski-in ski-out mansion, nestled within a pristine gated community of Heber City, Utah. This opulent retreat offers ultimate luxury and style with no expense spared in creating an environment of unparalleled comfort and elegance. Experience the pinnacle of extravagant living in this ski-in ski-out mansion, and bask in the splendor of a magnificent mountain retreat.",
+        description: "Welcome to the grandeur of this exquisite ski-in ski-out mansion, nestled within a pristine gated community of Heber City, Utah. ",
         price: 279,
       }
     ], {})
