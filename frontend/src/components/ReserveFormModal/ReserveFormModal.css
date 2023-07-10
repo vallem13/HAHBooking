@@ -1,0 +1,15 @@
+#coming-soon-box {
+    display: flex;
+    flex-direction: column;
+    margin: 100px 100px;
+    align-items: center;
+    align-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.go-back-reserve-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}

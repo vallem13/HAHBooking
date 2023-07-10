@@ -15,14 +15,14 @@ const SingleSpot = ({ spot }) => {
                 <h3 className='name'>{spot.name}</h3>
                 <img className='singleImage' src={spot.previewImage} alt={spot.name} title={spot.name}></img>
             </div>
-            <div classsName='location-rating'>
+            <div id='location-rating'>
                 <div className='city-state'>{spot.city}, {spot.state}</div>
                 <div className='rating'>
                     <span class="material-symbols-outlined">star_rate</span>
                     {spot.averageRating ? `${Number(spot.averageRating).toFixed(1)}` : 'New!'}
                 </div>
             </div>
-            <div>${Number(spot.price).toFixed(2)} night</div>
+            <div className='price'>${Number(spot.price).toFixed(2)} night</div>
         </div>
     )
 

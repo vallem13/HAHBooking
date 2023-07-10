@@ -1,0 +1,43 @@
+#login-form {
+    display: flex;
+    flex-direction: column;
+    margin: 100px 100px;
+    align-items: center;
+    align-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    row-gap: 20px;
+}
+
+#review-text {
+    height: 100px;
+    width: 400px;
+}
+
+.empty {
+    color: rgb(69,69,69);
+    height: 20px;
+    font-size: 40px;
+}
+
+.filled {
+    color: rgb(201,239,199);
+    height: 20px;
+    font-size: 40px;
+}
+
+#stars-container {
+    display: flex;
+    column-gap: 10px;
+}
+
+.stars {
+    display: flex;
+}
+
+.star-label {
+    font-size: 20px;
+}
+
+.submit-button {
+    padding-top: 30px;
+}

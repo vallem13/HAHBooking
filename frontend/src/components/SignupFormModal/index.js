@@ -74,11 +74,12 @@ function SignupFormModal() {
   };
 
   return (
-    <div className="signupForm">
-      <h1>Sign Up</h1>
-      <form className="signupInputs" onSubmit={handleSubmit}>
+    <div id="signup-form">
+      <img className='logo' src='../logo/hahbooking-high-resolution-color-logo.png' alt='HAHBooking' />
+      <h1 className="title" >Sign Up</h1>
+      <form className="signup" onSubmit={handleSubmit}>
         <label>
-          Email
+          <div className="username">Email</div>
           <input
             className="signupInputs"
             type="text"
@@ -91,7 +92,7 @@ function SignupFormModal() {
           <p className='error-message'>{errors.email}</p>
         )}
         <label>
-          Username
+        <div className="password">Username</div>
           <input
             className="signupInputs"
             type="text"
@@ -104,7 +105,7 @@ function SignupFormModal() {
           <p className='error-message'>{errors.username}</p>
         )}
         <label>
-          First Name
+        <div className="password">First Name</div>
           <input
             className="signupInputs"
             type="text"
@@ -117,7 +118,7 @@ function SignupFormModal() {
           <p className='error-message'>{errors.firstName}</p>
         )}
         <label>
-          Last Name
+        <div className="password">Last Name</div>
           <input
             className="signupInputs"
             type="text"
@@ -130,7 +131,7 @@ function SignupFormModal() {
           <p className='error-message'>{errors.lastName}</p>
         )}
         <label>
-          Password
+        <div className="password">Password</div>
           <input
             className="signupInputs"
             type="password"
@@ -143,7 +144,7 @@ function SignupFormModal() {
           <p className='error-message'>{errors.password}</p>
         )}
         <label>
-          Confirm Password
+        <div className="password">Confirm Password</div>
           <input
             className="signupInputs"
             type="password"
@@ -155,7 +156,9 @@ function SignupFormModal() {
         {errors.confirmPassword && confirmPassword.length > 0 && (
           <p className='error-message'>{errors.confirmPassword}</p>
         )}
-        <button type="submit" disabled={Object.keys(errors).length > 0}>Sign Up</button>
+        <div className="signup-button-container">
+        <button className='signup-button' type="submit" disabled={Object.keys(errors).length > 0}>Sign Up</button>
+        </div>
       </form>
     </div>
   );

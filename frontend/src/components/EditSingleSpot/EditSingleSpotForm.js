@@ -66,18 +66,20 @@ const EditSingleSpotForm = ({ spot }) => {
 
     return (
 
-        <>
+        <div id="create-single-spot-form">
             <form className='createSpotForm' onSubmit={handleSubmit}>
 
                 <h1>Update your Spot</h1>
 
                 <div className='createSpotTitle'>
 
+                <div className="where-place-located">
                     <h3>Where's your place located?</h3>
                     <p>Guests will only get your exact address once they booked a reservation.</p>
-
+                    </div>
                     <label>Country</label>
                     <input
+                    className="country-address-input"
                         type="text"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
@@ -87,6 +89,7 @@ const EditSingleSpotForm = ({ spot }) => {
 
                     <label>Street Address</label>
                     <input
+                    className="country-address-input"
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
@@ -94,32 +97,39 @@ const EditSingleSpotForm = ({ spot }) => {
                     />
                     {errors.address && submitted && <p className='errorsForm'>{errors.address}</p>}
 
+                    <div className="city-state-box">
+                    <div className="city-box">
                     <label>City</label>
                     <input
+                    className="city-input"
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder='City'
                     />
                     {errors.city && submitted && <p className='errorsForm'>{errors.city}</p>}
-
+                    </div>
+                    <div className="state-box">
                     <label>State</label>
                     <input
+                    className="state-input"
                         type="text"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         placeholder='State'
                     />
                     {errors.state && submitted && <p className='errorsForm'>{errors.state}</p>}
-
+                    </div>
+                </div>
                 </div>
 
-                <div className='createSpotTitle'>
+                <div className='describe-your-place'>
 
                     <h3>Describe your place to guests</h3>
                     <p>Mention the best feature of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
 
                     <textarea
+                    className="describe-text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Please write at least 30 characters"
@@ -130,24 +140,35 @@ const EditSingleSpotForm = ({ spot }) => {
 
                 <div className='createSpotTitle'>
 
+                <div className="create-title">
+
                     <h3>Create a title for your spot</h3>
                     <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
 
+                    </div>
+
+                    <div className="create-title-input-box">
+
                     <input
+                    className="create-title-input"
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder='Name your spot'
                     />
                     {errors.name && submitted && <p className='errorsForm'>{errors.name}</p>}
-
+                    </div>
                 </div>
 
                 <div className='createSpotTitle'>
 
+                <div className="set-price-box">
+
                     <h3>Set a base price for your spot</h3>
                     <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
 
+                    </div>
+                    <div className="set-price">
                     $<input
                         type="number"
                         value={price}
@@ -155,14 +176,18 @@ const EditSingleSpotForm = ({ spot }) => {
                         placeholder='Price per night (USD)'
                     />
                     {errors.price && submitted && <p className='errorsForm'>{errors.price}</p>}
+                    </div>
+
+                </div>
+                <div className="submit-create-button-box">
+
+                <button className="submit-create-button" type="submit">Update Spot</button>
 
                 </div>
 
-                <button type="submit">Update Spot</button>
-
             </form>
 
-        </>
+        </div>
 
     )
 

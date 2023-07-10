@@ -18,11 +18,13 @@ const DeleteSingleSpotModal = ({ spot, user, spotId }) => {
     }
 
     return (
-        <div>
+        <div id='delete-confirmation-box'>
             <h4>Confirm Delete</h4>
             <h3>Are you sure you want to delete this spot?</h3>
-            <button onClick={deleteSpot}>Yes (Delete Spot)</button>
-            <button onClick={dontDeleteSpot}>No (Keep Spot)</button>
+            <div className='delete-buttons'>
+            <button className='delete-button-yes' onClick={deleteSpot}>Yes (Delete Spot)</button>
+            <button className='delete-button-no' onClick={dontDeleteSpot}>No (Keep Spot)</button>
+            </div>
         </div>
     )
 }

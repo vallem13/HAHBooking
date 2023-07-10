@@ -34,24 +34,27 @@ const UserManageSpots = () => {
     }
 
     return (
-        <>
-            <div>
+        <div className="manage-spots-container">
+            <div className="manage-spots">
                 <h1>{userSpots.length <= 0 ? 'Add your first Spot!' : 'Manage your Spots'}</h1>
-                <button onClick={createNewSpotButton} >Create a New Spot</button>
+                <button className="create-spot-button" onClick={createNewSpotButton} >Create a New Spot</button>
             </div>
-            <div>
+            <div className="user-allSpots">
                 {userSpots.map(spot =>(
-                        <div>
+                        <div className="single-user-spot-container">
                             <SingleSpot key={spot.id} manage={true} spot={spot} />
+
+                            <div className="update-delete-user-buttons">
+                            <button className="" onClick={() => editSpot(spot.id)}>Update Spot</button>
 
                             <OpenModalButton buttonText="Delete Spot" modalComponent={<DeleteSingleSpotModal spotId={spot.id}/>}/>
 
-                            <button onClick={() => editSpot(spot.id)}>Update</button>
+                            </div>
                         </div>
                     )
                 )}
             </div>
-        </>
+        </div>
     )
 }
 

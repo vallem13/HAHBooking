@@ -1,6 +1,4 @@
 .singleSpot {
-
-    height: 400px;
     width: 400px;
     cursor: pointer;
 }
@@ -24,13 +22,20 @@
     object-fit: cover;
 }
 
-.location-rating {
-    border: 1px solid black;
+#location-rating {
     display: flex;
     justify-content: space-between;
 }
 
 .city-state {
     display: flex;
+}
 
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    font-size: 20px;
 }

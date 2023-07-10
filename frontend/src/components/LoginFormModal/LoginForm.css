@@ -20,9 +20,22 @@
     padding-bottom: 5px;
 }
 
-.login-button {
-    display: flex;
+.login-buttons {
+    display: grid;
     padding-top: 10px;
     padding-bottom: 5px;
     justify-content: center;
+    row-gap: 10px;
+}
+
+.login-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}
+
+.username-password-input {
+    height: 30px;
+    width: 220px;
 }

@@ -32,13 +32,23 @@
 #user-session {
     list-style-type: none;
     position: absolute;
-    right: 30px;
+    right: 50px;
+    top: 90px;
+    height: 160px;
+    width: 170px;
     border: 1px solid black;
     padding: 20px 20px;
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
 }
+
+
+.loggedin {
+    display: grid;
+    row-gap: 10px;
+}
+
 
 .user-menu {
     padding: 5px;
@@ -61,4 +71,40 @@
     /* border: 1px solid black; */
     display: flex;
     align-items: center;
+}
+
+.logout-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 5px 20px;
+}
+
+#user-session > .logout-button {
+    display: flex;
+    justify-content: center;
+}
+
+.manage-user-spots {
+    text-decoration: none;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-right: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color:black
+}
+
+.logout-login-signup-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 50px;
+}
+
+.login-signup-buttons {
+    display: grid;
+    row-gap: 40px;
+    justify-content: center;
+    padding-top: 20px
 }

@@ -1,1 +1,46 @@
+.manage-spots-container {
+    display: grid;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
+.user-allSpots {
+    /* border: 2px solid red; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 200px));
+    grid-template-rows: minmax(400px);
+    row-gap: 20px;
+    column-gap: 50px;
+    width: 100%;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.manage-spots {
+    border: 1px;
+    padding-left: 80px
+}
+
+.create-spot-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}
+
+.single-user-spot-container {
+    display: grid;
+    row-gap: 20px
+}
+
+.update-delete-user-buttons {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+
+.update-delete-user-buttons > button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}

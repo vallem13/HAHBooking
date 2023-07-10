@@ -10,15 +10,15 @@
 }
 
 .single-prevImg {
-    height: 625px;
-    width: 600px;
+    height: 425px;
+    width: 400px;
     padding-left: 100px;
     padding-top: 10px;
 }
 
 .single-allImg {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     padding: 10px;
 }
 
@@ -26,32 +26,54 @@
     padding-left: 100px;
 }
 
-.single-details {
+#single-details {
     padding-left: 100px;
-    padding-right: 120px;
+    padding-right: 70px;
     display: flex;
     justify-content: space-between;
     padding-bottom: 40px;
 
 }
 
+.owner-description {
+    margin-right: 60px;
+}
+
 .reserve-box {
     border: 3px solid black;
     border-radius: 10px;
-    padding: 40px 40px;
+    padding: 20px;
+    padding-right: 1px;
+    padding-left: 1px;
+    width: 800px;
+}
+
+.reserve-box > #reserve-button {
+    display: flex;
+    justify-content: center;
+}
+
+.reserve-box > .reserve-price-rating {
+    display: flex;
+    justify-content: center;
 }
 
 .reserve-price-rating {
     display: flex;
-    column-gap: 50px;
+    column-gap: 30px;
     padding-bottom: 20px;
+    align-items: center;
 }
 
-.reserve-button {
-    display: flex;
+#reserve-button > button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 80px;
+    justify-content: center;
 }
 
-.reserve-rating {
+#reserve-rating {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -61,4 +83,36 @@
     /* padding-left: 100px; */
     margin: 100px;
     border-top: 1px solid black;
+}
+
+.new-rating {
+    display: flex;
+    align-items: center;
+}
+
+#post-review-button > button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}
+
+.delete-review-button > button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}
+
+.singleSpot-description {
+    font-weight: 10;
+}
+
+.review-user-name {
+    font-size: x-large;
+    margin-bottom: 1px;
+}
+
+.review-createdAt {
+    color: grey
 }

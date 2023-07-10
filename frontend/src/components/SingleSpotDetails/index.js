@@ -55,46 +55,50 @@ const SingleSpotDetails = () => {
                 </div>
                 <div >
                     {allImages.map(image =>
-                    <img className='single-allImg' key={image.id} src={image.url} alt={name}></img>)}
+                        <img className='single-allImg' key={image.id} src={image.url} alt={name}></img>)}
                 </div>
             </div>
-            <div className='single-details'>
-                <div>
+            <div id='single-details'>
+                <div className='owner-description'>
                     <h1>Hosted by: {Owner.firstName} {Owner.lastName}</h1>
-                    <h2>Description: {description}</h2>
+                    <h2 className='singleSpot-description'>Description: {description}</h2>
                 </div>
                 <div className='reserve-box'>
                     <div className='reserve-price-rating'>
-                    <h2>${price} night</h2>
-                    {reviewsArr.length ?
-                        <div>
-                            <h3 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
-                        </div>
-                        :
-                        <div>
-                            <h3 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>New</h3>
-                        </div>}
+                        <h2>${price} night</h2>
+                        {reviewsArr.length ?
+                            <div>
+                                <h3 id='reserve-rating'><span className="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h3>
+                            </div>
+                            :
+                            <div>
+                                <h3 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>New</h3>
+                            </div>}
                     </div>
-                    <OpenModalButton className='reserve-button' buttonText='Reserve' modalComponent={<ReserveFormModal />} />
+                    <div id='reserve-button'>
+                        <OpenModalButton buttonText='Reserve' modalComponent={<ReserveFormModal />} />
+                    </div>
                 </div>
             </div>
-            <div>
+            <div className='singleSpot-reviews'>
                 {reviewsArr.length ?
-                    <div className='singleSpot-reviews'>
-                        <h1 className='reserve-rating'><span className="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h1>
+                    <div>
+                        <h1 id='reserve-rating'><span className="material-symbols-outlined">star_rate</span>{Number(averageRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h1>
                         {user && !(checkReview || checkOwner) && (
+                            <div id='post-review-button'>
                             <OpenModalButton
                                 buttonText="Post Your Review"
                                 modalComponent={<CreateSpotReviewModal user={user} spot={spot} />}
                             />
+                            </div>
                         )}
                         {reviewsArr.map((review) => (
                             <div>
-                                <h3>{review.User.firstName}</h3>
-                                <p>{getDate(review.createdAt)}</p>
-                                <p>{review.review}</p>
+                                <h3 className='review-user-name'>{review.User.firstName}</h3>
+                                <p className='review-createdAt'>{getDate(review.createdAt)}</p>
+                                <p className='review-review'>{review.review}</p>
                                 {(review.userId === user?.id) &&
-                                    <div>
+                                    <div className='delete-review-button'>
                                         <OpenModalButton
                                             buttonText="Delete Review"
                                             modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spot.id} />}
@@ -106,14 +110,16 @@ const SingleSpotDetails = () => {
                     </div>
                     :
                     <div>
-                        <h3><span className="material-symbols-outlined">hotel_class</span>New</h3>
-                        <h4>Be the first to post a review!</h4>
+                        <h2 className='new-rating'><span className="material-symbols-outlined">star_rate</span>New</h2>
                         {user && !(checkReview || checkOwner) && (
-                            <OpenModalButton
-                                buttonText="Post Your Review"
-                                modalComponent={<CreateSpotReviewModal user={user} spot={spot} />}
-                            />
-                        )}
+                            <div id='post-review-button'>
+                                <h4>Be the first to post a review!</h4>
+                                <OpenModalButton
+                                    buttonText="Post Your Review"
+                                    modalComponent={<CreateSpotReviewModal user={user} spot={spot} />}
+                                    />
+                                </div>
+                            )}
                     </div>
                 }
             </div>

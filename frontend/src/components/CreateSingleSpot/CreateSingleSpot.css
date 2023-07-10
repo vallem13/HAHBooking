@@ -1,0 +1,121 @@
+#create-single-spot-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+    margin-right: 200px;
+    align-items: center;
+    align-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.createSpotForm {
+    display: grid
+}
+
+.createSpotTitle {
+    display: grid;
+    row-gap: 10px;
+}
+
+.country-address-input {
+    height: 30px;
+}
+
+.city-state-box {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.city-box {
+    display: flex;
+    align-items: center;
+    column-gap: 10px
+}
+
+.city-input {
+    height: 30px;
+    width: 360px;
+}
+
+.state-box {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.state-input {
+    height: 30px;
+}
+
+.describe-your-place {
+    border-top: 1px solid black;
+    padding-bottom: 20px;
+}
+
+.describe-text {
+    height: 100px;
+    width: 600px;
+}
+
+.create-title {
+    border-top: 1px solid black;
+}
+
+.create-title-input {
+    height: 30px;
+    width: 600px;
+}
+
+.create-title-input-box {
+    padding-bottom: 20px;
+}
+
+.set-price-box {
+    border-top: 1px solid black;
+}
+
+.set-price {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.set-price-input {
+    height: 30px;
+    width: 590px;
+}
+
+.liven-spot-title {
+    border-top: 1px solid black;
+}
+
+.image-url-input {
+    height: 30px;
+}
+
+.submit-create-button-box {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.createSpotTitle-images {
+    display: grid;
+    row-gap: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+
+}
+
+.submit-create-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 63px;
+}
+
+.errorsForm {
+    color: rgb(246, 150, 149);
+}

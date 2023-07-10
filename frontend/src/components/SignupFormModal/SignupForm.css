@@ -1,4 +1,4 @@
-.signupForm {
+#signup-form {
     display: flex;
     flex-direction: column;
     margin: 100px 100px;
@@ -7,10 +7,24 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.signupInputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.signup {
     align-content: space-between;
-    gap: 10px;
+}
+
+.signupInputs {
+    height: 30px;
+    width: 300px;
+}
+
+.signup-button {
+    border-color:  rgb(201,239,199);
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 10px 90px;
+}
+
+.signup-button-container {
+    display: flex;
+    padding-top: 40px;
+    justify-content: center;
 }

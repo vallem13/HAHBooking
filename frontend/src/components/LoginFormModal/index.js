@@ -43,19 +43,20 @@ function LoginFormModal() {
   const demoUserLogin = (e) => {
     e.preventDefault()
     return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
-        .then(closeModal)
+      .then(closeModal)
   }
 
 
 
   return (
     <div id='login-form'>
+      <img className='logo' src='../logo/hahbooking-high-resolution-color-logo.png' alt='HAHBooking' />
       <h1 className="title">Log In</h1>
       <form id="login" onSubmit={handleSubmit}>
         <label>
           <div className="username">Username or Email</div>
           <input
-            className="username-input"
+            className="username-password-input"
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
@@ -68,7 +69,7 @@ function LoginFormModal() {
         <label>
           <div className="password">Password</div>
           <input
-            className="password-input"
+            className="username-password-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -78,11 +79,11 @@ function LoginFormModal() {
         {errors.password && password.length > 0 && (
           <p className='error-message'>{errors.password}</p>
         )}
-        <div className="login-button">
-          <button type="submit" disabled={Object.keys(errors).length > 0}>Log In</button>
+        <div className="login-buttons">
+          <button className="login-button" type="submit" disabled={Object.keys(errors).length > 0}>Log In</button>
+          <button className="login-button" onClick={demoUserLogin}>Demo User Login</button>
         </div>
       </form>
-      <button className="demo-login-button" onClick={demoUserLogin}>Demo User Login</button>
     </div>
   );
 }
