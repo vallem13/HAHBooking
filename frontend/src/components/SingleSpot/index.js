@@ -12,7 +12,7 @@ const SingleSpot = ({ spot }) => {
     return (
         <div className='singleSpot' onClick={getSpotById} >
             <div className='name-image'>
-                <h3 className='name'>{spot.name}</h3>
+            <span className='name-tooltip'>{spot.name}</span>
                 <img className='singleImage' src={spot.previewImage} alt={spot.name} title={spot.name}></img>
             </div>
             <div id='location-rating'>

@@ -1,15 +1,24 @@
 .singleSpot {
     width: 400px;
+    height: 400px;
     cursor: pointer;
 }
 
-.name {
+.name-tooltip {
     visibility: hidden;
+    position: absolute;
+    width: 100px;
+    color: rgb(69,69,69);
+    font-size: 12px;
+    background-color: rgb(201,239,199);
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
 }
 
-.singleSpot:hover .name {
-    visibility: visible
-}
+.singleSpot:hover .name-tooltip {
+    visibility: visible;
+  }
 
 .name-image {
     border-radius: 10px;
