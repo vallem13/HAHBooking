@@ -14,12 +14,14 @@
     width: 400px;
     padding-left: 100px;
     padding-top: 10px;
+    object-fit: cover;
 }
 
 .single-allImg {
     height: 200px;
     width: 200px;
     padding: 10px;
+    object-fit: cover;
 }
 
 .single-name {

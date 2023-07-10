@@ -39,3 +39,7 @@
     height: 30px;
     width: 220px;
 }
+
+.error-message {
+    color: rgb(246, 150, 149);
+}
