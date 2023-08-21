@@ -10,7 +10,7 @@ const EditSingleSpot = () => {
     const spot = useSelector(state => state.spots.singleSpot);
 
 
-    console.log("-------->index", spot)
+    // console.log("-------->index", spot)
 
     useEffect(() => {
         dispatch(thunkGetSingleSpot(spotId))
